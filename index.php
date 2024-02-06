@@ -33,6 +33,5 @@
                 exit;
             }
         ?>
-        
     </body>
 </html>
