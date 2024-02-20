@@ -10,17 +10,23 @@
             Benutzername: <input type="text" name="Benutzername"/></br>
             Passwort: <input type="password" name="Passwort"/></br>
             Passwort bestätigen: <input type="password" name="Passwort2"/></br>
-            <input type="submit" name="submit" value="Login"/>
+            <select method="POST" name="Rolle" id="Rolle" size="1">
+                <option value="1" name="Student"> Student </option>
+                <option value="2" name="Dozent"> Dozent </option>
+                <option value="3" name="Admin"> Admin </option>
+            </select></br></br>
+            <input type="submit" name="submit" value="Registrieren"/>
         </form>
         <?php
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-            $db = new mysqli('localhost', 'root', '', 'login');    
+            $db = new mysqli('localhost', 'root', '', 'uni');    
             
             if (isset($_POST["submit"])){
                 $name = $_POST["Benutzername"];
                 $pass = hash_hmac('sha256', $_POST['Passwort'], $name); //Passwort verschlüsseln
+                $rolle = $_POST["Rolle"];
 
-                $query = "SELECT * FROM accounts";
+                $query = "SELECT * FROM benutzer";
                 $result = $db->execute_query($query);
 
                 foreach ($result as $row) {
@@ -32,8 +38,8 @@
 
 
                 if ($_POST["Passwort"] == $_POST["Passwort2"]){
-                    $query = sprintf ("INSERT INTO `accounts` (Benutzer_ID, Benutzername, Passwort) 
-                                        VALUES ('NULL', '%s', '%s')", $name, $pass);
+                    $query = sprintf ("INSERT INTO `benutzer` (ID, Benutzername, Passwort, Roll_ID) 
+                                        VALUES ('NULL', '%s', '%s', '%s')", $name, $pass, $rolle);
 
                     if ($db->execute_query($query) === true) {
                         echo ("success");

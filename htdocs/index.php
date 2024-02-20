@@ -13,10 +13,9 @@
         </form>
         <?php
             if (isset($_POST["submit"])){
-                mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-                $db = new mysqli('localhost', 'root', '', 'login');    
+                $db = new mysqli('localhost', 'root', '', 'uni');    
                 
-                $query = "SELECT * FROM accounts";
+                $query = "SELECT * FROM benutzer";
                 $result = $db->execute_query($query);
                 $name = $_POST["Benutzername"];
 
