@@ -22,9 +22,8 @@
                 foreach ($result as $row) {
                     if ($row["Benutzername"] == $name) {
                         if (hash_equals(hash_hmac('sha256', $_POST["Passwort"], $name), $row["Passwort"])) { //Passwort entschlüsseln
-                            echo nl2br ("Login succsessful\r Hallo $name");
+                            header("Location: kalender.php");
                             exit;
-                            $_POST = array();
                         }
                     }
                 } 
