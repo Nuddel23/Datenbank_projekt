@@ -18,7 +18,6 @@
             <input type="submit" name="submit" value="Registrieren"/>
         </form>
         <?php
-            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
             $db = new mysqli('localhost', 'root', '', 'uni');    
             
             if (isset($_POST["submit"])){
@@ -35,10 +34,9 @@
                         exit;
                     }
                 }
-
-
+                
                 if ($_POST["Passwort"] == $_POST["Passwort2"]){
-                    $query = sprintf ("INSERT INTO `benutzer` (ID, Benutzername, Passwort, Roll_ID) 
+                    $query = sprintf ("INSERT INTO `benutzer` (id, Benutzername, Passwort, Roll_id) 
                                         VALUES ('NULL', '%s', '%s', '%s')", $name, $pass, $rolle);
 
                     if ($db->execute_query($query) === true) {

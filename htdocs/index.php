@@ -22,7 +22,9 @@
                 foreach ($result as $row) {
                     if ($row["Benutzername"] == $name) {
                         if (hash_equals(hash_hmac('sha256', $_POST["Passwort"], $name), $row["Passwort"])) { //Passwort entschlüsseln
-                            header("Location: kalender.php");
+                            session_start();
+                            $_SESSION["row"]=$row;
+                            header("Location: page.php");
                             exit;
                         }
                     }
