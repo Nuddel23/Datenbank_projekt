@@ -23,6 +23,7 @@
                     if ($row["Benutzername"] == $name) {
                         if (hash_equals(hash_hmac('sha256', $_POST["Passwort"], $name), $row["Passwort"])) { //Passwort entschlüsseln
                             session_start();
+                            #$row['Roll_ID']=1;
                             $_SESSION["row"]=$row;
                             header("Location: page.php");
                             exit;
