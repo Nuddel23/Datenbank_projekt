@@ -12,6 +12,11 @@
             <input type="submit" name="submit" value="Login"/>
         </form>
         <?php
+            session_start();
+            if ($_SESSION['login'] == true){
+                header("Location: page.php");
+            }
+
             if (isset($_POST["submit"])){
                 $db = new mysqli('localhost', 'root', '', 'uni');    
                 
@@ -22,9 +27,8 @@
                 foreach ($result as $row) {
                     if ($row["Benutzername"] == $name) {
                         if (hash_equals(hash_hmac('sha256', $_POST["Passwort"], $name), $row["Passwort"])) { //Passwort entschlüsseln
-                            session_start();
-                            #$row['Roll_ID']=1;
-                            $_SESSION["row"]=$row;
+                            $_SESSION['login']=true;
+                            $_SESSION["benutzer"]=$row;
                             header("Location: page.php");
                             exit;
                         }
