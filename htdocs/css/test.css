@@ -1,0 +1,21 @@
+body {
+    --numX: 5;
+    --numY: 10;
+    --YHeight: 60px;
+}
+
+.event {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto 1fr;
+
+    background-color: red;
+}
+
+.days {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: auto 1fr;
+    margin: 2rem;
+    background-color: antiquewhite;
+}
