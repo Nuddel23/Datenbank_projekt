@@ -15,20 +15,20 @@
             <?php
                 #Setup
                 session_start();
-                $session_row = $_SESSION['benutzer'];
                 $db = new mysqli('localhost', 'root', '', 'uni');
 
-                #Abmelden Knopf
-                if (isset($_POST["Abmelden"])){
-                   $_SESSION['login'] = false;
-                }
+             #Abmelden Knopf
+             if (isset($_POST["Abmelden"])){
+                $_SESSION['login'] = false;
+            }
             
-                #Abmelden
-                if ($_SESSION['login'] == false){
-                    $_SESSION['benutzer'] = array();
-                    header("Location: index.php");
-                    exit;
-                }
+            #Abmelden
+            if ($_SESSION['login'] == false){
+                unset($_SESSION['benutzer']);
+                unset($_SESSION["Roll_ID"]);
+                header("Location: index.php");
+                exit;
+            }
 
                 #Zeiten
                 #echo ('<div class="timeline">');
@@ -37,11 +37,12 @@
                 #}
                 #echo ('</div> <div class="days>"');
 
-                if($session_row["Roll_ID"] == 3){
+                if($_SESSION["Roll_ID"] == 3){
                     exit;
                 }
 
                 #Veranstaltungen anzeigen
+                $benutzer = $_SESSION["benutzer"];
                 $query= sprintf(
                     "SELECT `student`.`Matrikelnummer`, `student_konver`.`Note`, `konkrete_veranstaltung`.`Datum`, `veranstaltung`.*, `dozent`.`Name`
                     FROM `student` 
@@ -49,7 +50,7 @@
                         LEFT JOIN `konkrete_veranstaltung` ON `student_konver`.`KonVer_ID` = `konkrete_veranstaltung`.`KonVer_ID` 
                         LEFT JOIN `veranstaltung` ON `konkrete_veranstaltung`.`Veranstaltungs_ID` = `veranstaltung`.`Veranstaltungs_ID` 
                         LEFT JOIN `dozent` ON `konkrete_veranstaltung`.`Dozi_ID` = `dozent`.`Dozi_ID`
-                        WHERE `student`.`Matrikelnummer` = '%s';", $session_row["Matrikelnummer"]);
+                        WHERE `student`.`Matrikelnummer` = '%s';", $benutzer["Matrikelnummer"]);
                 
                 $result = $db->execute_query($query);
                 #print_r ($result);

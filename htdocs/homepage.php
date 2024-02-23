@@ -19,7 +19,8 @@
             
             #Abmelden
             if ($_SESSION['login'] == false){
-                $_SESSION['benutzer'] = array();
+                unset($_SESSION['benutzer']);
+                unset($_SESSION["Roll_ID"]);
                 header("Location: index.php");
                 exit;
             }
@@ -27,7 +28,7 @@
             echo ("<h1><Center>Hallo ");
 
             #Rollen auswahl
-            switch ($session_row['Roll_ID']){
+            switch ($_SESSION['Roll_ID']){
                 case 1:      
                     $query = 
                         "SELECT `student`.*, `benutzer`.*
