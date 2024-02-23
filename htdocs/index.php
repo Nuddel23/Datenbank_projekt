@@ -29,7 +29,7 @@
                         if (hash_equals(hash_hmac('sha256', $_POST["Passwort"], $name), $row["Passwort"])) { //Passwort entschlüsseln
                             $_SESSION['login']=true;
                             $_SESSION["benutzer"]=$row;
-                            header("Location: page.php");
+                            header("Location: homepage.php");
                             exit;
                         }
                     }
