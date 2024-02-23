@@ -14,7 +14,7 @@
         <?php
             session_start();
             if ($_SESSION['login'] == true){
-                header("Location: page.php");
+                header("Location: homepage.php");
             }
 
             if (isset($_POST["submit"])){

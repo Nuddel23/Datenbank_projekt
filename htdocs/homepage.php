@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/homepage.css?v=<?php echo time(); ?>">
         <title> Kalender </title>
     </head>
     <body>
@@ -66,5 +65,6 @@
         <form method="post" action="">    
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from>
+        <a href="Veranstaltungen.php">Veranstaltungen</a> 
     </body>
 </html>
