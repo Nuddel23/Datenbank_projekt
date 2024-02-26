@@ -67,5 +67,11 @@
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from>
         <a href="Veranstaltungen.php">Veranstaltungen</a> 
+        <?php            
+            #Admin Panel
+            if ($_SESSION["Roll_ID"] == 3){
+                echo ('<a href="admin_page.php">Admin Panel</a>');
+            }
+        ?>
     </body>
 </html>

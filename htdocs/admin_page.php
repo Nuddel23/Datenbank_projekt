@@ -6,10 +6,6 @@
         <title>Document</title>
     </head>
     <body>
-        <form method="post" action="">    
-            <input type="submit" name="Abmelden" value="Abmelden"/>
-        </from>
-
         <?php
             #Setup
             session_start();
@@ -30,7 +26,14 @@
             }
 
             #nur Admin
-            if ($_SESSION["Roll_ID"])
+            if ($_SESSION["Roll_ID"] != 3){
+                echo ("<h1><Center>Du bist kein Admin</Center></h1>");
+                exit;
+            }
         ?>
+        <form method="post" action="">    
+            <input type="submit" name="Abmelden" value="Abmelden"/>
+        </from>
+        <a href="homepage.php">Homepage</a>
     </body>
 </html>

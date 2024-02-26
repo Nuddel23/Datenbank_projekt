@@ -11,25 +11,31 @@
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from>
         <a href="homepage.php">Homepage</a> 
-        <div class="calender">
+        
             <?php
                 #Setup
                 session_start();
                 $db = new mysqli('localhost', 'root', '', 'uni');
 
-             #Abmelden Knopf
-             if (isset($_POST["Abmelden"])){
-                $_SESSION['login'] = false;
-            }
+                #Abmelden Knopf
+                if (isset($_POST["Abmelden"])){
+                    $_SESSION['login'] = false;
+                }
             
-            #Abmelden
-            if ($_SESSION['login'] == false){
-                unset($_SESSION['benutzer']);
-                unset($_SESSION["Roll_ID"]);
-                header("Location: index.php");
-                exit;
-            }
+                #Abmelden
+                if ($_SESSION['login'] == false){
+                    unset($_SESSION['benutzer']);
+                    unset($_SESSION["Roll_ID"]);
+                    header("Location: index.php");
+                    exit;
+                }
 
+                #Admin Panel
+                if ($_SESSION["Roll_ID"] == 3){
+                    echo ('<a href="admin_page.php">Admin Panel</a>');
+                }
+
+                echo ('<div class="calender">');
                 #Zeiten
                 #echo ('<div class="timeline">');
                 #for ($i = 1; $i <= 10; $i++) {
