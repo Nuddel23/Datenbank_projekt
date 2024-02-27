@@ -6,5 +6,4 @@
 # But not these files...
 !.gitignore
 !/htdocs/
-!/mysql/^
 !README.md

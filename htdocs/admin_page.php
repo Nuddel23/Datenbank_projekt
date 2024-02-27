@@ -35,5 +35,7 @@
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from>
         <a href="homepage.php">Homepage</a>
+        </br>
+        <a href="studenten_einfügen.php">Studenten Einfügen</a>
     </body>
 </html>
