@@ -18,7 +18,7 @@
             <input type="submit" name="submit" value="Registrieren"/>
         </form>
         <?php
-            $db = new mysqli('localhost', 'root', '', 'uni');    
+            $db = new mysqli('localhost', 'root', '', 'uni_neu');    
             
             if (isset($_POST["submit"])){
                 $name = $_POST["Benutzername"];

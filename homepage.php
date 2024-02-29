@@ -10,7 +10,7 @@
             #Setup
             session_start();
             $session_row = $_SESSION['benutzer'];
-            $db = new mysqli('localhost', 'root', '', 'uni');
+            $db = new mysqli('localhost', 'root', '', 'uni_neu');
 
             #Abmelden Knopf
             if (isset($_POST["Abmelden"])){
