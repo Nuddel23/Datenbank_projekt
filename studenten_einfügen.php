@@ -35,10 +35,10 @@
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from>
         <a href="homepage.php">Homepage</a></br>
-        </br>
-        <form method="post" action="">
+        <h1>Student Anmeldung:</h1>
+        <form method="POST" action="">
             Name: <input type="text" name="name"/></br>
-            Vorname: <input type="password" name="vorname"/></br>
+            Vorname: <input type="text" name="vorname"/></br>
             Geburtsdatum: <input type="date" name="geburtstag"/></br>
             <input type="radio" name="geschlecht" value="mänlich">
             Mänlich<br>
@@ -46,24 +46,64 @@
             Weiblich<br>
             Konfession: <input type="text" name="konfession"/></br>
             Staatsangehörigkeit: <input type="text" name="staatsangehörigkeit"/></br>
-            Studiengänge:</br>
             <?php
+                #Studiengang
+                echo ("Studiengänge:</br>");
                 $query = "SELECT * FROM `studiengang`";
                 $result = $db->execute_query($query);
 
                 foreach ($result as $row) {
-                    echo ('<input type="radio" name="studiengang" value="'.$row["Bezeichnung"].'">
+                    echo ('<input type="radio" name="studiengang" value="'.$row["Studi_ID"].'">
                     '.$row["Bezeichnung"].'<br>');
                 }
 
+                #Adresse
+                echo ("Adresse:</br>");
+                $query = "SELECT * FROM `adresse`";
+                $result = $db->execute_query($query);
+
+                foreach ($result as $row) {
+                    echo ('<input type="radio" name="adresse" value="'.$row["Adress_ID"].'">
+                    '.$row["Straße"].' '.$row["Hausnummer"].' '.$row["PLZ"].'<br>');
+                }
             ?>
-            <input type="submit" name="submit" value="Login"/>
+            <input type="submit" name="submit" value="einfügen"/>
         </form>
 
         <?php
-            $querry = sprintf("INSERT INTO `student` (`Matrikelnummer`, `Name`, `Vorname`, `Geburtsdatum`, `Geschlecht`, `Konfession`, `Staatsangehörigkeit`, `Studi_ID`, `Adress_ID`)
-            VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ", "2", "3", "4", "5", "6", "7", "8", "9");
-            #muss noch Form erstellen und benutzer id klären
+        if (isset($_POST["submit"])){
+            
+            #studien_ID
+            $query = "SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'uni_neu' AND TABLE_NAME = 'student'; ";
+            $result = $db->execute_query($query);   
+
+            foreach ($result as $row) {
+                $Matrikelnummer = $row["AUTO_INCREMENT"];
+            }
+
+            #student insert
+            $query = sprintf("INSERT INTO `student` (`Matrikelnummer`, `Name`, `Vorname`, `Geburtsdatum`, `Geschlecht`, `Konfession`, `Staatsangehörigkeit`, `Studi_ID`, `Adress_ID`)
+            VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ", 
+            $Matrikelnummer, $_POST["name"], $_POST["vorname"], $_POST["geburtstag"], $_POST["geschlecht"], $_POST["konfession"], $_POST["staatsangehörigkeit"], $_POST["studiengang"], $_POST["adresse"]);
+            
+            if ($db->execute_query($query) === true) {
+                echo ("student success</br>");
+            }
+            else {
+                echo (mysqli::error);
+            }
+            
+            #benutzer_ID insert
+            $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `student_ID`, `dozent_ID`) VALUES (NULL, '".($Matrikelnummer)."', NULL) ", );    
+            if ($db->execute_query($query) === true) {
+                echo ("benutzer success</br>");
+            }
+            else {
+                echo (mysqli::error);
+            } 
+
+            
+        }
         ?>
     </body>
 </html>
