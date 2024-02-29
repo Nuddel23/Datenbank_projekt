@@ -20,7 +20,9 @@
             if (isset($_POST["submit"])){
                 $db = new mysqli('localhost', 'root', '', 'uni_uni');    
                 
-                $query = "SELECT * FROM benutzer";
+                $query = "SELECT `benutzer`.*, `benutzer_id`.*
+                            FROM `benutzer` 
+                            LEFT JOIN `benutzer_id` ON `benutzer`.`ID` = `benutzer_id`.`Ben_ID`;";
                 $result = $db->execute_query($query);
                 $name = $_POST["Benutzername"];
 

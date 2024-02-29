@@ -40,33 +40,38 @@
             Name: <input type="text" name="name"/></br>
             Vorname: <input type="text" name="vorname"/></br>
             Geburtsdatum: <input type="date" name="geburtstag"/></br>
-            <input type="radio" name="geschlecht" value="mänlich">
-            Mänlich<br>
-            <input type="radio" name="geschlecht" value="weiblich">
-            Weiblich<br>
+            <input type="radio" id="mänlich" name="geschlecht" value="mänlich">
+            <label for="mänlich">Mänlich</label>
+            <input type="radio" id="weiblich" name="geschlecht" value="weiblich">
+            <label for="weiblich">Weiblich</label><br>
             Konfession: <input type="text" name="konfession"/></br>
             Staatsangehörigkeit: <input type="text" name="staatsangehörigkeit"/></br>
             <?php
-                #Studiengang
-                echo ("Studiengänge:</br>");
-                $query = "SELECT * FROM `studiengang`";
-                $result = $db->execute_query($query);
-
-                foreach ($result as $row) {
-                    echo ('<input type="radio" name="studiengang" value="'.$row["Studi_ID"].'">
-                    '.$row["Bezeichnung"].'<br>');
-                }
-
                 #Adresse
-                echo ("Adresse:</br>");
+                echo("Adresse:</br>");
+                echo ('<select name="adresse">');
                 $query = "SELECT * FROM `adresse`";
                 $result = $db->execute_query($query);
 
                 foreach ($result as $row) {
-                    echo ('<input type="radio" name="adresse" value="'.$row["Adress_ID"].'">
-                    '.$row["Straße"].' '.$row["Hausnummer"].' '.$row["PLZ"].'<br>');
+                    echo ('<option value="'.$row["Adress_ID"].'">
+                    '.$row["Straße"].' '.$row["Hausnummer"].' '.$row["PLZ"].'</option>');
                 }
+                echo ("</select></br>");
+
+                #Studiengang
+                echo ("Studiengänge:</br>");
+                echo ('<select name="studiengang">');
+                $query = "SELECT * FROM `studiengang`";
+                $result = $db->execute_query($query);
+
+                foreach ($result as $row) {
+                    echo ('<option value="'.$row["Studi_ID"].'">
+                    '.$row["Bezeichnung"].'</option>');
+                }
+                echo ("</select></br>");
             ?>
+            </br>
             <input type="submit" name="submit" value="einfügen"/>
         </form>
 
@@ -102,7 +107,7 @@
                 echo (mysqli::error);
             } 
 
-            
+
         }
         ?>
     </body>
