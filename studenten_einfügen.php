@@ -41,16 +41,14 @@
         <form method="POST" action="">
             <?php
             
-            if (isset($_SESSION["rolle_temp"]) == false){       #aufräumen
+            # Session rolle_temp ist dafür da, das die auswahl von Dozent oder student bleibt
+            if (isset($_SESSION["rolle_temp"]) == false){
                 $_SESSION["rolle_temp"] = 1;
             }
             # $_POST["rolle"] deklarieren, da es sonst fehler gibt
             if (isset($_POST["rolle"]) == false){
                 $_POST["rolle"] = $_SESSION["rolle_temp"];
             }
-            print_r ($_POST);
-            
-
 
             #Rolle
             echo("Rolle:</br>");
@@ -74,15 +72,15 @@
         </form>
 
         <form method="POST" action="">
-            Name: <input type="text" name="name"/></br>
-            Vorname: <input type="text" name="vorname"/></br>
-            Geburtsdatum: <input type="date" name="geburtstag"/></br>
-            <input type="radio" id="mänlich" name="geschlecht" value="mänlich">
+            Name: <input type="text" name="name" required /></br>
+            Vorname: <input type="text" name="vorname" required /></br>
+            Geburtsdatum: <input type="date" name="geburtstag" required /></br>
+            <input type="radio" id="mänlich" name="geschlecht" value="mänlich" required >
             <label for="mänlich">Mänlich</label>
-            <input type="radio" id="weiblich" name="geschlecht" value="weiblich">
+            <input type="radio" id="weiblich" name="geschlecht" value="weiblich" required >
             <label for="weiblich">Weiblich</label><br>
-            Konfession: <input type="text" name="konfession"/></br>
-            Staatsangehörigkeit: <input type="text" name="staatsangehörigkeit"/></br>
+            Konfession: <input type="text" name="konfession" required /></br>
+            Staatsangehörigkeit: <input type="text" name="staatsangehörigkeit" required /></br>
             <?php
 
                 #Adresse
@@ -118,11 +116,8 @@
 
         <?php
         if (isset($_POST["submit1"])){
-            print_r($_SESSION);                                 #aufräumen
 
             $_POST["rolle"] = $_SESSION["rolle_temp"];
-            print_r($_POST);
-
 
             #studdent oder dozent
             if ($_POST["rolle"] == 1){
@@ -181,8 +176,7 @@
             $_SESSION["rolle_temp"] = NULL;
         }
         else{
-            echo "test";
-            $_SESSION["rolle_temp"] = $_POST["rolle"];          #aufräumen
+            $_SESSION["rolle_temp"] = $_POST["rolle"];
         }
         ?>
     </body>
