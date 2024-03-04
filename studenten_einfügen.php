@@ -10,7 +10,7 @@
             #Setup
             session_start();
             $session_row = $_SESSION['benutzer'];
-            $db = new mysqli('localhost', 'root', '', 'uni_neu');
+            $db = new mysqli('localhost', 'root', '', 'uni');
             
             #Abmelden Knopf
             if (isset($_POST["Abmelden"])){
@@ -127,7 +127,7 @@
                 $rolle = "dozent";
             }
 
-            $query = sprintf("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'uni_neu' AND TABLE_NAME = '%s'; ", $rolle);
+            $query = sprintf("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'uni' AND TABLE_NAME = '%s'; ", $rolle);
             $result = $db->execute_query($query);   
 
             foreach ($result as $row) {
@@ -160,10 +160,10 @@
             
             #benutzer_ID einfügen
             if ($_POST["rolle"] == 1){
-                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES (NULL, '1', '".$Person_ID."', NULL)", ); 
+                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES (NULL, '%s', '%s', NULL)", $_POST["rolle"], $Person_ID); 
             }
             elseif ($_POST["rolle"] == 2){
-                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES (NULL, '1', NULL, '".$Person_ID."')", ); 
+                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES (NULL, '%s', NULL, '%s')", $_POST["rolle"], $Person_ID); 
             }
 
             if ($db->execute_query($query) === true) {

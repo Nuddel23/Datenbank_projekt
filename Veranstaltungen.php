@@ -15,7 +15,7 @@
             <?php
                 #Setup
                 session_start();
-                $db = new mysqli('localhost', 'root', '', 'uni_neu');
+                $db = new mysqli('localhost', 'root', '', 'uni');
 
                 #Abmelden Knopf
                 if (isset($_POST["Abmelden"])){

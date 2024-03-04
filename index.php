@@ -18,7 +18,7 @@
             }
 
             if (isset($_POST["submit"])){
-                $db = new mysqli('localhost', 'root', '', 'uni_uni');    
+                $db = new mysqli('localhost', 'root', '', 'uni');    
                 
                 $query = "SELECT `benutzer`.*, `benutzer_id`.*
                             FROM `benutzer` 
