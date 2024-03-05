@@ -159,15 +159,25 @@
             }
             
             #benutzer_ID einfügen
+            $query = ("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'uni' AND TABLE_NAME = 'benutzer_ID'; ");
+            $result = $db->execute_query($query);   
+
+            foreach ($result as $row) {
+                $Ben_ID = $row["AUTO_INCREMENT"];
+            }
+
             if ($_POST["rolle"] == 1){
-                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES (NULL, '%s', '%s', NULL)", $_POST["rolle"], $Person_ID); 
+                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', '%s', NULL)", $_POST["rolle"], $Person_ID); 
             }
             elseif ($_POST["rolle"] == 2){
-                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES (NULL, '%s', NULL, '%s')", $_POST["rolle"], $Person_ID); 
+                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', NULL, '%s')", $_POST["rolle"], $Person_ID); 
             }
 
             if ($db->execute_query($query) === true) {
                 echo ("benutzer success</br>");
+                $random = rand();
+                echo ("<a href='http://localhost/registrieren.php?ID=".hash_hmac('sha256', $Ben_ID, $random)."'>Registrieren</a></br>");
+                echo ("Admin Code: ".$random);
             }
             else {
                 echo (mysqli::error);
