@@ -21,7 +21,7 @@
             if ($_SESSION['login'] == false){
                 unset($_SESSION['benutzer']);
                 unset($_SESSION["Roll_ID"]);
-                header("Location: index.php");
+                header("Location: /../index.php");
                 exit;
             }
 
@@ -35,9 +35,10 @@
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from>
 
-        <a href="homepage.php">Homepage</a></br>
+        <a href="/../homepage.php">Homepage</a></br>
         <h1>Benutzer erstellen:</h1>
 
+        <!-- Rolle auswahl -->
         <form method="POST" action="">
             <?php
             
@@ -70,6 +71,8 @@
             echo ("</select></br>");
             ?>
         </form>
+
+        <!-- Daten eintragen -->
         <form method="POST" action="">
         <?php
         if ($_POST["rolle"] != 3){
@@ -114,7 +117,8 @@
             </br>
             <input type="submit" name="submit1" value="einfügen"/>
         </form>
-
+        
+        <!-- Daten verarbeiten -->
         <?php
         if (isset($_POST["submit1"])){
 

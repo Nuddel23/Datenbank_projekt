@@ -21,7 +21,7 @@
             if ($_SESSION['login'] == false){
                 unset($_SESSION['benutzer']);
                 unset($_SESSION["Roll_ID"]);
-                header("Location: index.php");
+                header("Location: /../index.php");
                 exit;
             }
 
@@ -35,7 +35,7 @@
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from>
 
-        <a href="homepage.php">Homepage</a></br>
+        <a href="/../homepage.php">Homepage</a></br>
         <h1>Adressen hinzufügen:</h1>
         <form method="post" action="">
             Straße: <input type="text" name="Straße" required /></br>
