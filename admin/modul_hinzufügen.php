@@ -20,7 +20,7 @@
             #Abmelden
             if ($_SESSION['login'] == false){
                 unset($_SESSION['benutzer']);
-                unset($_SESSION["Roll_ID"]);
+                unset($_SESSION["Studi_ID"]);
                 header("Location: /../index.php");
                 exit;
             }
@@ -38,34 +38,34 @@
         <a href="/../homepage.php">Homepage</a></br>
         <h1>Modul hinzufügen:</h1>
         
-        <!-- Rolle auswahl -->
+        <!-- studiengang auswahl -->
         <form method="POST" action="">
             <?php
             
-            # Session rolle_temp ist dafür da, das die auswahl von Dozent oder student bleibt
-            if (isset($_SESSION["rolle_temp"]) == false){
-                $_SESSION["rolle_temp"] = 1;
+            # Session studiengang_temp ist dafür da, das die auswahl von Dozent oder student bleibt
+            if (isset($_SESSION["studiengang_temp"]) == false){
+                $_SESSION["studiengang_temp"] = 1;
             }
-            # $_POST["rolle"] deklarieren, da es sonst fehler gibt
-            if (isset($_POST["rolle"]) == false){
-                $_POST["rolle"] = $_SESSION["rolle_temp"];
+            # $_POST["studiengang"] deklarieren, da es sonst fehler gibt
+            if (isset($_POST["studiengang"]) == false){
+                $_POST["studiengang"] = $_SESSION["studiengang_temp"];
             }
 
-            #Rolle
-            echo("Rolle:</br>");
-            echo ('<select name="rolle" onchange="this.form.submit()">'); 
+            #studiengang
+            echo("Studiengang:</br>");
+            echo ('<select name="studiengang" onchange="this.form.submit()">'); 
             
-            $query = "SELECT * FROM `rollen`";
+            $query = "SELECT * FROM `studiengang`";
             $result = $db->execute_query($query);
 
             foreach ($result as $row) {
-                if ($row["Roll_ID"] == $_POST["rolle"]){
-                    echo ('<option selected="selected" value="'.$row["Roll_ID"].'">
-                '.$row["Rolle"].'</option>');
+                if ($row["Studi_ID"] == $_POST["studiengang"]){
+                    echo ('<option selected="selected" value="'.$row["Studi_ID"].'">
+                '.$row["Bezeichnung"].'</option>');
                 }
                 else{
-                    echo ('<option value="'.$row["Roll_ID"].'">
-                '.$row["Rolle"].'</option>');
+                    echo ('<option value="'.$row["Studi_ID"].'">
+                '.$row["Bezeichnung"].'</option>');
                 }
             }
             echo ("</select></br>");
@@ -74,70 +74,51 @@
 
         <!-- Daten eintragen -->
         <form method="POST" action="">
-        <?php
-        if ($_POST["rolle"] != 3){
-            echo (' Name: <input type="text" name="name" required /></br>
-                    Vorname: <input type="text" name="vorname" required /></br>
-                    Geburtsdatum: <input type="date" name="geburtstag" required /></br>
-                    <input type="radio" id="mänlich" name="geschlecht" value="mänlich" required >
-                    <label for="mänlich">Mänlich</label>
-                    <input type="radio" id="weiblich" name="geschlecht" value="weiblich" required >
-                    <label for="weiblich">Weiblich</label><br>
-                    Konfession: <input type="text" name="konfession" required /></br>
-                    Staatsangehörigkeit: <input type="text" name="staatsangehörigkeit" required /></br>
-                ');
-
-                #Adresse
-                echo("Adresse:</br>");
-                echo ('<select name="adresse">');
-                $query = "SELECT * FROM `adresse`";
+            <?php
+                #alle Module werden mit radio button angezeigt
+                $query = "SELECT `modul`.*, `beinhaltet`.`Semester`, `studiengang`.`Studi_ID`
+                    FROM `modul` 
+                    LEFT JOIN `beinhaltet` ON `beinhaltet`.`Modul_ID` = `modul`.`Modul_ID` 
+                    LEFT JOIN `studiengang` ON `beinhaltet`.`Studi_ID` = `studiengang`.`Studi_ID`;";
                 $result = $db->execute_query($query);
-
+    
                 foreach ($result as $row) {
-                    echo ('<option value="'.$row["Adress_ID"].'">
-                    '.$row["Straße"].' '.$row["Hausnummer"].' '.$row["PLZ"].'</option>');
-                }
-                echo ("</select></br>");
-
-                #Studiengang
-                if ($_POST["rolle"] == 1){                    
-                    echo ("Studiengänge:</br>");
-                    echo ('<select name="studiengang">');
-                    $query = "SELECT * FROM `studiengang`";
-                    $result = $db->execute_query($query);
-
-                    foreach ($result as $row) {
-                        echo ('<option value="'.$row["Studi_ID"].'">
-                        '.$row["Bezeichnung"].'</option>');
+                    if ($row["Studi_ID"] == $_POST["studiengang"]){
+                        echo sprintf('<input type="radio" id="%s" name="Modul" value="%s" required >
+                        <label for="%s">%s</label></br>', $row["Bezeichnung"], $row["Modul_ID"], $row["Bezeichnung"], $row["Bezeichnung"]." ".$row["Semester"] );
                     }
-                    echo ("</select></br>");
                 }
-        }
+                echo ('<input type="radio" id="Neu" name="Modul" value=Null required >
+                <label for="%s">
+                    Modul: <input type="text" name="Modul_neu" required />
+                    Semester: <input type="text" name="Semester_neu" required />
+                </label></br>');
+                
             ?>
-            </br>
             <input type="submit" name="submit1" value="einfügen"/>
         </form>
+        
 
         <!-- Daten verarbeiten -->
         <?php
         if (isset($_POST["submit1"])){
 
-            $_POST["rolle"] = $_SESSION["rolle_temp"];
+            $_POST["studiengang"] = $_SESSION["studiengang_temp"];
 
-            #studdent oder dozent
-            if ($_POST["rolle"] == 1){
-                $rolle = "student";
+            #student oder dozent
+            if ($_POST["studiengang"] == 1){
+                $studiengang = "student";
             }
-            elseif ($_POST["rolle"] == 2){
-                $rolle = "dozent";
+            elseif ($_POST["studiengang"] == 2){
+                $studiengang = "dozent";
             }
-            elseif ($_POST["rolle"] == 3){
-                $rolle = "admin";
+            elseif ($_POST["studiengang"] == 3){
+                $studiengang = "admin";
             }
 
-            if ($_POST["rolle"] != 3){
+            if ($_POST["studiengang"] != 3){
 
-                $query = sprintf("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'uni' AND TABLE_NAME = '%s'; ", $rolle);
+                $query = sprintf("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'uni' AND TABLE_NAME = '%s'; ", $studiengang);
                 $result = $db->execute_query($query);   
 
                 foreach ($result as $row) {
@@ -145,14 +126,14 @@
                 }
 
                 #query auswahl
-                if ($_POST["rolle"] == 1){
+                if ($_POST["studiengang"] == 1){
 
                     #student insert
                     $query = sprintf("INSERT INTO `student` (`Matrikelnummer`, `Name`, `Vorname`, `Geburtsdatum`, `Geschlecht`, `Konfession`, `Staatsangehörigkeit`, `Adress_ID`, `Studi_ID`) 
                     VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ", 
                     $Person_ID, $_POST["name"], $_POST["vorname"], $_POST["geburtstag"], $_POST["geschlecht"], $_POST["konfession"], $_POST["staatsangehörigkeit"], $_POST["adresse"], $_POST["studiengang"]);
                 }
-                elseif ($_POST["rolle"] == 2){
+                elseif ($_POST["studiengang"] == 2){
 
                     #dozent insert
                     $query = sprintf("INSERT INTO `dozent` (`Dozi_ID`, `Name`, `Vorname`, `Geburtsdatum`, `Geschlecht`, `Konfession`, `Staatsangehörigkeit`, `Adress_ID`) 
@@ -162,7 +143,7 @@
                 
                 #einfügen
                 if ($db->execute_query($query) === true) {
-                    echo ("$rolle success</br>");
+                    echo ("$studiengang success</br>");
                 }
                 else {
                     echo ($db->error);
@@ -177,14 +158,14 @@
                 $Ben_ID = $row["AUTO_INCREMENT"];
             }
 
-            if ($_POST["rolle"] == 1){
-                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', '%s', NULL)", $_POST["rolle"], $Person_ID); 
+            if ($_POST["studiengang"] == 1){
+                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Studi_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', '%s', NULL)", $_POST["studiengang"], $Person_ID); 
             }
-            elseif ($_POST["rolle"] == 2){
-                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', NULL, '%s')", $_POST["rolle"], $Person_ID); 
+            elseif ($_POST["studiengang"] == 2){
+                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Studi_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', NULL, '%s')", $_POST["studiengang"], $Person_ID); 
             }
-            elseif ($_POST["rolle"] == 3){
-                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', NULL, Null)", $_POST["rolle"]); 
+            elseif ($_POST["studiengang"] == 3){
+                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Studi_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', NULL, Null)", $_POST["studiengang"]); 
             }
 
             if ($db->execute_query($query) === true) {
@@ -197,10 +178,10 @@
                 echo ($db->error);
             } 
 
-            $_SESSION["rolle_temp"] = NULL;
+            $_SESSION["studiengang_temp"] = NULL;
         }
         else{
-            $_SESSION["rolle_temp"] = $_POST["rolle"];
+            $_SESSION["studiengang_temp"] = $_POST["studiengang"];
         }
         ?>
         </body>

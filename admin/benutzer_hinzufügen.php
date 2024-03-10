@@ -124,7 +124,7 @@
 
             $_POST["rolle"] = $_SESSION["rolle_temp"];
 
-            #studdent oder dozent
+            #student oder dozent
             if ($_POST["rolle"] == 1){
                 $rolle = "student";
             }
