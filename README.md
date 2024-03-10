@@ -4,15 +4,15 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 # Todo
 
 ## geplant
-- studiengang einfügen
-- module einfügen
 - Veranstalltungen erstellen
 - dozenten konkrete Veranstalltungen erstellen lassen
 - studenten studiengang, module und Veranstalltungen anzeigen lassen
 
 ## am machen 
+- module einfügen
 
 ## erledigt
+- studiengang einfügen
 - Login
 - studenten, dozenten und admins einfügen
 - benutzer erstellen

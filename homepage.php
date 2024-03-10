@@ -69,11 +69,12 @@
         <?php            
             #Admin Panel
             if ($_SESSION["Roll_ID"] == 3){
-                echo ('<a href="benutzer_erstellen.php">Benuter erstellen </a>');
-                echo ('<a href="adresse_hinzufügen.php">Adrese hinzufügen </a>');
+                echo ('</br><a href="benutzer_hinzufügen.php">Benuter erstellen </a>');
+                echo ('</br><a href="adresse_hinzufügen.php">Adrese hinzufügen </a>');
+                echo ('</br><a href="studiengang_hinzufügen.php">Studiengang hinzufügen </a>');
             }
             else {
-                echo ('<a href="Veranstaltungen.php">Veranstaltungen </a> ');
+                echo ('</br><a href="Veranstaltungen.php">Veranstaltungen </a> ');
             }
         ?>
     </body>
