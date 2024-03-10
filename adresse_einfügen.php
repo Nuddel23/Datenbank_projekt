@@ -84,7 +84,7 @@
                         echo ("PLZ success");
                     }
                     else {
-                        echo (mysqli::error);
+                        echo ($db->error);
                     }
                 }
                 print_r($_POST);
@@ -98,7 +98,7 @@
                     $_POST = array();
                 }
                 else {
-                    echo (mysqli::error);
+                    echo ($db->error);
                 }
             }
 

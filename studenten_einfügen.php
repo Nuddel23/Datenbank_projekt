@@ -161,7 +161,7 @@
                     echo ("$rolle success</br>");
                 }
                 else {
-                    echo (mysqli::error);
+                    echo ($db->error);
                 }
             }
             
@@ -190,7 +190,7 @@
                 echo ("Admin Code: ".$random);
             }
             else {
-                echo (mysqli::error);
+                echo ($db->error);
             } 
 
             $_SESSION["rolle_temp"] = NULL;

@@ -17,6 +17,7 @@
             $db = new mysqli('localhost', 'root', '', 'uni');    
             
             if (isset($_POST["submit"])){
+
                 $name = $_POST["Benutzername"];
                 $pass = hash_hmac('sha256', $_POST['Passwort'], $name); //Passwort verschlüsseln
 
@@ -51,14 +52,14 @@
 
                 if ($_POST["Passwort"] == $_POST["Passwort2"]){
                     $query = sprintf ("INSERT INTO `benutzer` (ID, Benutzername, Passwort) 
-                                        VALUES ('%s', '%s', '%s')", $ID, $name, $pass); //überarberiten
+                                        VALUES ('%s', '%s', '%s')", $ID, $name, $pass); 
 
                     if ($db->execute_query($query) === true) {
                         echo ("success");
                         $_POST = array();
                     }
                     else {
-                        echo (mysqli::error);
+                        echo ($db->error);
                     }
                 }
                 else {
