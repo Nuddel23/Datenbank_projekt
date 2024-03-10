@@ -31,27 +31,27 @@
             switch ($_SESSION['Roll_ID']){
                 case 1:      
                     $query = 
-                        "SELECT `student`.*, `benutzer`.*
+                        "SELECT `student`.*, `benutzer_id`.*
                         FROM `student` 
-                        LEFT JOIN `benutzer` ON `student`.`ben_ID` = `benutzer`.`ID`;";
+                        LEFT JOIN `benutzer_id` ON `benutzer_id`.`student_ID` = `student`.`Matrikelnummer`;";
                     break;
                 case 2:
                     $query = 
-                        "SELECT `dozent`.*, `benutzer`.*
+                        "SELECT `dozent`.*, `benutzer_id`.*
                         FROM `dozent` 
-                        LEFT JOIN `benutzer` ON `dozent`.`ben_ID` = `benutzer`.`ID`;";
+                        LEFT JOIN `benutzer_id` ON `benutzer_id`.`dozent_ID` = `dozent`.`Dozi_ID`;";
                     break;
                 case 3:
                     $query=
-                        "SELECT `benutzer`.*
-                        FROM `benutzer`;";
+                        "SELECT `benutzer_id`.*
+                        FROM `benutzer_id`;";
                     echo ("Admin"."</Center></h1>");
                     break;
             }
             $result = $db->execute_query($query);
             
             foreach($result as $row){
-                if ($row['ID'] == $session_row['ID']){
+                if ($row['Ben_ID'] == $session_row['Ben_ID']){
                     
                     $_SESSION['benutzer'] = $row;
                     
