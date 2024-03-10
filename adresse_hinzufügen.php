@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Adrese hinzufügen</title>
     </head>
     <body>
         <?php
@@ -31,12 +31,12 @@
                 exit;
             }
         ?>
-        <!-- <form method="post" action="">    
+        <form method="post" action="">    
             <input type="submit" name="Abmelden" value="Abmelden"/>
-        </from> -->
+        </from>
 
         <a href="homepage.php">Homepage</a></br>
-        <h1>Student Anmeldung:</h1>
+        <h1>Adressen hinzufügen:</h1>
         <form method="post" action="">
             Straße: <input type="text" name="Straße" required /></br>
             Hausnummer: <input type="text" name="Hausnummer" required /></br>
@@ -55,13 +55,9 @@
                 $result = $db->execute_query($query);
                 $new_adresse = true;
 
-                foreach ($result as $row) {
-                    echo("</br>");
-                    print_r($row);
-                    echo("</br>");
-                    print_r($_POST);   
+                foreach ($result as $row) {  
                     if ($row["Straße"] == $_POST["Straße"] && $row["Hausnummer"] == $_POST["Hausnummer"] && $row["PLZ"] == $_POST["PLZ"] && $row["Ort"] == $_POST["Ort"]) {
-                        echo ("Adresse exestiert bereits");
+                        echo ("Adresse exestiert bereits </br>");
                         exit;
                     }
 
@@ -70,7 +66,7 @@
                             $new_adresse = false;
                         }
                         else{
-                            echo ("Ort und PLZ stimmen nicht überein");
+                            echo ("Ort und PLZ stimmen nicht überein </br>");
                             exit;
                         }
                     }
@@ -81,20 +77,19 @@
                     $query = sprintf("INSERT INTO `plz` (`PLZ`, `Ort`) VALUES ('%s', '%s') ", $_POST["PLZ"], $_POST["Ort"]);
 
                     if ($db->execute_query($query) === true) {
-                        echo ("PLZ success");
+                        echo ("PLZ success </br>");
                     }
                     else {
                         echo ($db->error);
                     }
                 }
-                print_r($_POST);
                 
                 #adresse hinzufügen
                 $query = sprintf ("INSERT INTO `adresse` (`Adress_ID`, `Straße`, `Hausnummer`, `PLZ`) 
                                     VALUES (NULL, '%s', '%s', '%s') ", $_POST["Straße"], $_POST["Hausnummer"], $_POST["PLZ"]); 
 
                 if ($db->execute_query($query) === true) {
-                    echo ("Adrese success");
+                    echo ("Adrese success </br>");
                     $_POST = array();
                 }
                 else {

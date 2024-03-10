@@ -1,5 +1,28 @@
 # Datenbank Projekt
 Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Universität erstellen sollen.
+
+# Todo
+
+## geplant
+- studiengang einfügen
+- module einfügen
+- Veranstalltungen erstellen
+- dozenten konkrete Veranstalltungen erstellen lassen
+- studenten studiengang, module und Veranstalltungen anzeigen lassen
+
+## am machen 
+
+## erledigt
+- Login
+- studenten, dozenten und admins einfügen
+- benutzer erstellen
+- adresse einfügen
+- temp homepage 
+- temp admin page
+
+
+
+
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⢀⣴⠟⠉⠀⠀⠀⠈⠻⣦⡀⠀⠀⠀⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣀⢀⣾⠿⠻⢶⣄⠀⠀⣠⣶⡿⠶⣄⣠⣾⣿⠗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀

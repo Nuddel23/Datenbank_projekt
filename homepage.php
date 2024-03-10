@@ -66,11 +66,14 @@
         <form method="post" action="">    
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from>
-        <a href="Veranstaltungen.php">Veranstaltungen</a> 
         <?php            
             #Admin Panel
             if ($_SESSION["Roll_ID"] == 3){
-                echo ('<a href="admin_page.php">Admin Panel</a>');
+                echo ('<a href="benutzer_erstellen.php">Benuter erstellen </a>');
+                echo ('<a href="adresse_hinzufügen.php">Adrese hinzufügen </a>');
+            }
+            else {
+                echo ('<a href="Veranstaltungen.php">Veranstaltungen </a> ');
             }
         ?>
     </body>

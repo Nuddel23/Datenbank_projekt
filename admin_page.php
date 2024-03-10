@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Admin Panel</title>
     </head>
     <body>
         <?php
@@ -35,7 +35,7 @@
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from>
         <a href="homepage.php">Homepage</a>
-        </br>
-        <a href="studenten_einfügen.php">Studenten Einfügen</a>
+
+        <a href="benutzer_erstellen.php"> Benuter erstellen</a>
     </body>
 </html>

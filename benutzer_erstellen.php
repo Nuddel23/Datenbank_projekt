@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Benutzer erstellen</title>
     </head>
     <body>
         <?php
@@ -36,7 +36,7 @@
         </from>
 
         <a href="homepage.php">Homepage</a></br>
-        <h1>Student Anmeldung:</h1>
+        <h1>Benutzer erstellen:</h1>
 
         <form method="POST" action="">
             <?php
