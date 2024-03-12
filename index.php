@@ -1,6 +1,7 @@
 <html>
     <head>
         <title> Login Page </title>
+        <link rel="stylesheet" href="css/login.css?v=<?php echo time(); ?>">
     </head>
     <body>
         <h1>Login</h1>
@@ -15,9 +16,9 @@
             if (isset($_SESSION["login"]) == false){
                 $_SESSION["login"] = false;
             }
-            if ($_SESSION['login'] == true){
-                header("Location: homepage.php");
-            }
+            // if ($_SESSION['login'] == true){
+            //     header("Location: homepage.php");
+            // }
 
             if (isset($_POST["submit"])){
                 $db = new mysqli('localhost', 'root', '', 'uni');    
