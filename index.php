@@ -4,7 +4,6 @@
     </head>
     <body>
         <h1>Login</h1>
-        <a href="registrieren.php">Registrieren</a> </br>
         <p></p>
         <form method="post" action="">
             Benutzername: <input type="text" name="Benutzername"/></br>
@@ -13,6 +12,9 @@
         </form>
         <?php
             session_start();
+            if (isset($_SESSION["login"]) == false){
+                $_SESSION["login"] = false;
+            }
             if ($_SESSION['login'] == true){
                 header("Location: homepage.php");
             }

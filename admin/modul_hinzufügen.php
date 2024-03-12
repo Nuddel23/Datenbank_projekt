@@ -81,18 +81,25 @@
                     LEFT JOIN `beinhaltet` ON `beinhaltet`.`Modul_ID` = `modul`.`Modul_ID` 
                     LEFT JOIN `studiengang` ON `beinhaltet`.`Studi_ID` = `studiengang`.`Studi_ID`;";
                 $result = $db->execute_query($query);
-    
+
                 foreach ($result as $row) {
-                    if ($row["Studi_ID"] == $_POST["studiengang"]){
-                        echo sprintf('<input type="radio" id="%s" name="Modul" value="%s" required >
-                        <label for="%s">%s</label></br>', $row["Bezeichnung"], $row["Modul_ID"], $row["Bezeichnung"], $row["Bezeichnung"]." ".$row["Semester"] );
+                    if ($row["Modul"] == $_POST["Modul"]){
+                        switch ($_POST["Auswahl"]){
+                            case "1":
+                        }
                     }
+                    echo sprintf('<input type="radio" id="%s" name="Modul" value="%s" required >
+                        <label for="%s">%s</label></br>', $row["Bezeichnung"], $row["Modul_ID"], $row["Bezeichnung"], $row["Bezeichnung"]." ".$row["Semester"] );
                 }
-                echo ('<input type="radio" id="Neu" name="Modul" value=Null required >
-                <label for="%s">
-                    Modul: <input type="text" name="Modul_neu" required />
-                    Semester: <input type="text" name="Semester_neu" required />
-                </label></br>');
+
+                echo ('Auswhal:</br>
+                <input type="radio" id="Neu" name="Auswhal" value=1 required >
+                <label for="%s">Löschen</label></br>
+                <input type="radio" id="Neu" name="Auswhl" value=2 required >
+                <label for="%s">Bearbeiten</label></br>
+                <input type="radio" id="Neu" name="Auswahl" value=3 required >
+                <label for="%s">Neu</label></br>');
+                
                 
             ?>
             <input type="submit" name="submit1" value="einfügen"/>

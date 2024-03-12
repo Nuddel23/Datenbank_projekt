@@ -17,5 +17,5 @@ body {
     gap: 2rem;
     grid-template-columns: auto 1fr;
     margin: 2rem;
-    background-color: antiquewhite;
+    background-color: red;
 }
