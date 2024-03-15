@@ -9,7 +9,6 @@
         <?php
             #Setup
             session_start();
-            $session_row = $_SESSION['benutzer'];
             $db = new mysqli('localhost', 'root', '', 'uni');
             
             #Abmelden Knopf

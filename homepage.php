@@ -9,7 +9,6 @@
         <?php
             #Setup
             session_start();
-            $session_row = $_SESSION['benutzer'];
             $db = new mysqli('localhost', 'root', '', 'uni');
 
             #Abmelden Knopf
@@ -51,7 +50,7 @@
             $result = $db->execute_query($query);
             
             foreach($result as $row){
-                if ($row['Ben_ID'] == $session_row['Ben_ID']){
+                if ($row['Ben_ID'] == $_SESSION["benutzer"]['Ben_ID']){
                     
                     $_SESSION['benutzer'] = $row;
                     
