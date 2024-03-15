@@ -14,7 +14,7 @@
             <input type="submit" name="submit" value="Registrieren" required />
         </form>
         <?php
-            $db = new mysqli('localhost', 'root', '', 'uni');    
+            require $_SERVER['DOCUMENT_ROOT']."Datenbank";  
             
             if (isset($_POST["submit"])){
 

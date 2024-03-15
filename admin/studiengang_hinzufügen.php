@@ -9,7 +9,7 @@
         <?php
             #Setup
             session_start();
-            $db = new mysqli('localhost', 'root', '', 'uni');
+            require $_SERVER['DOCUMENT_ROOT']."Datenbank";
             
             #Abmelden Knopf
             if (isset($_POST["Abmelden"])){

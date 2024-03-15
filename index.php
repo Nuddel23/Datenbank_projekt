@@ -21,7 +21,7 @@
             // }
 
             if (isset($_POST["submit"])){
-                $db = new mysqli('localhost', 'root', '', 'uni');    
+                require $_SERVER['DOCUMENT_ROOT']."Datenbank";   
                 
                 $query = "SELECT `benutzer`.*, `benutzer_id`.*
                             FROM `benutzer` 
