@@ -18,8 +18,7 @@
             
             #Abmelden
             if ($_SESSION['login'] == false){
-                unset($_SESSION['benutzer']);
-                unset($_SESSION["Roll_ID"]);
+                $_SESSION = array();
                 header("Location: index.php");
                 exit;
             }
