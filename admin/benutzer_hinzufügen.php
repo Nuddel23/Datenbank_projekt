@@ -155,7 +155,7 @@
 
                     #dozent insert
                     $query = sprintf("INSERT INTO `dozent` (`Dozi_ID`, `Name`, `Vorname`, `Geburtsdatum`, `Geschlecht`, `Konfession`, `Staatsangehörigkeit`, `Adress_ID`) 
-                    VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '2') ", 
+                    VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ", 
                     $Person_ID, $_POST["name"], $_POST["vorname"], $_POST["geburtstag"], $_POST["geschlecht"], $_POST["konfession"], $_POST["staatsangehörigkeit"], $_POST["adresse"]);
                 }
                 
