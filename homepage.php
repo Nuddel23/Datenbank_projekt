@@ -9,7 +9,7 @@
         <?php
             #Setup
             session_start();
-            require $_SERVER['DOCUMENT_ROOT']."Datenbank";
+            require $_SERVER['DOCUMENT_ROOT']."/Datenbank.php";
 
             #Abmelden Knopf
             if (isset($_POST["Abmelden"])){

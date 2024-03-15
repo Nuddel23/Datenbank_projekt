@@ -21,7 +21,7 @@
             // }
 
             if (isset($_POST["submit"])){
-                require $_SERVER['DOCUMENT_ROOT']."Datenbank";   
+                require $_SERVER['DOCUMENT_ROOT']."/Datenbank.php";   
                 
                 $query = "SELECT `benutzer`.*, `benutzer_id`.*
                             FROM `benutzer` 

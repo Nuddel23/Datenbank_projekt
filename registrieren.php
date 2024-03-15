@@ -14,7 +14,7 @@
             <input type="submit" name="submit" value="Registrieren" required />
         </form>
         <?php
-            require $_SERVER['DOCUMENT_ROOT']."Datenbank";  
+            require $_SERVER['DOCUMENT_ROOT']."/Datenbank.php";  
             
             if (isset($_POST["submit"])){
 

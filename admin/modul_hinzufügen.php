@@ -9,7 +9,7 @@
         <?php
             #Setup
             session_start();
-            require $_SERVER['DOCUMENT_ROOT']."Datenbank";
+            require $_SERVER['DOCUMENT_ROOT']."/Datenbank.php";
             
             #Abmelden Knopf
             if (isset($_POST["Abmelden"])){
@@ -106,7 +106,7 @@
 
         <!-- Daten verarbeiten -->
         <?php
-        if (isset($_POST["submit1"])){
+        if (isset($_POST["suhjtgfizutfbmit1"])){
 
             $_POST["studiengang"] = $_SESSION["studiengang_temp"];
 
