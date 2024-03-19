@@ -7,8 +7,8 @@
         <h1>Login</h1>
         <p></p>
         <form method="post" action="">
-            Benutzername: <input type="text" name="Benutzername"/></br>
-            Passwort: <input type="password" name="Passwort"/></br>
+            <input type="text" placeholder="Benutzername" name="Benutzername"/></br>
+            <input type="password" placeholder="Passwort" name="Passwort"/></br>
             <input type="submit" name="submit" value="Login"/>
         </form>
         <?php

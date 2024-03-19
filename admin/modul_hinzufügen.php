@@ -81,7 +81,7 @@
                 $result = $db->execute_query($query);
 
                 foreach ($result as $row) {
-                    if ($row["Modul"] == $_POST["Modul"]){
+                    if ($row["Modul_ID"] == $_POST["Modul"]){
                         switch ($_POST["Auswahl"]){
                             case "1":
                         }
