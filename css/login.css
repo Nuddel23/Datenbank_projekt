@@ -1,11 +1,15 @@
 
 h1 {
-  color: #750014;
-  margin-left: 20px;
-  border-style: solid;
-  border-width: 5px;
-  border-color: red;
-  border-bottom-color: #ffc10700;
-  width: 80;
-  padding-top: 1;
-}
+    border-radius: 15px;
+    background-color: black;
+    padding: 20px; 
+    width: 80px;
+    height: 30px; 
+    background-position: center;
+  } 
+body {
+    color: rgb(255, 255, 255);
+    background-image: url("../img/hintergrund.jpg") ;
+    background-position: center;
+    background-size: cover;
+  }
