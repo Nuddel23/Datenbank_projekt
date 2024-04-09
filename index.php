@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="css/login.css?v=<?php echo time(); ?>">
     </head>
     <body>
+        <div class = "login_fenster" >
         <h1>Login</h1>
         <p></p>
         <form method="post" action="">
@@ -11,6 +12,7 @@
             <input type="password" placeholder="Passwort" name="Passwort"/></br>
             <input type="submit" name="submit" value="Login"/>
         </form>
+        </div>
         <?php
             session_start();
             if (isset($_SESSION["login"]) == false){
@@ -43,6 +45,7 @@
                 echo nl2br ("Login fehlgeschlagen\rPasswort oder Benutzername ist falsch");
                 exit;
             }
+        
         ?>
     </body>
 </html>
