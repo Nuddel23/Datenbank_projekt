@@ -59,7 +59,6 @@
             #Admin Panel
             if ($_SESSION["Roll_ID"] == 3){
                 echo ('</br><a href="admin/benutzer_hinzufügen.php">Benuter erstellen </a>');
-                echo ('</br><a href="admin/adresse_hinzufügen.php">Adrese hinzufügen </a>');
                 echo ('</br><a href="admin/studiengang_hinzufügen.php">Studiengang hinzufügen </a>');
                 echo ('</br><a href="admin/modul_hinzufügen.php">Modul hinzufügen </a>');
             }

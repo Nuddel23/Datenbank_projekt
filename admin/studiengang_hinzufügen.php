@@ -40,13 +40,13 @@
                 $query = sprintf ("INSERT INTO `studiengang` (`Studi_ID`, `Bezeichnung`) 
                 VALUES (Null, '%s') ", $_POST["Bezeichnung"]); 
 
-                    if ($db->execute_query($query) === true) {
-                        echo ("success");
-                        $_POST = array();
-                    }
-                    else {
-                        echo ($db->error);
-                    }
+                if ($db->execute_query($query) === true) {
+                    echo ("success");
+                    $_POST = array();
+                }
+                else {
+                    echo ($db->error);
+                }
             }
         ?>
     </body>

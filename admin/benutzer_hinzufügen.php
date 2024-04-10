@@ -11,7 +11,7 @@
             session_start();
             require $_SERVER['DOCUMENT_ROOT']."/Datenbank.php";
             
-            $AdminOnly = true;
+            $AdminOnly = false;
             require $_SERVER['DOCUMENT_ROOT']."/Anmelden.php";
         ?>
         <form method="post" action="">    
@@ -24,15 +24,6 @@
         <!-- Rolle auswahl -->
         <form method="POST" action="">
             <?php
-            
-            # Session rolle_temp ist dafür da, das die auswahl von Dozent oder student bleibt
-            if (isset($_SESSION["rolle_temp"]) == false){
-                $_SESSION["rolle_temp"] = 1;
-            }
-            # $_POST["rolle"] deklarieren, da es sonst fehler gibt
-            if (isset($_POST["rolle"]) == false){
-                $_POST["rolle"] = $_SESSION["rolle_temp"];
-            }
 
             #Rolle
             echo("Rolle:</br>");
@@ -40,6 +31,10 @@
             
             $query = "SELECT * FROM `rollen`";
             $result = $db->execute_query($query);
+
+            if (isset($_POST["rolle"]) == false){
+                $_POST["rolle"] = 1;
+            }
 
             foreach ($result as $row) {
                 if ($row["Roll_ID"] == $_POST["rolle"]){
@@ -51,7 +46,10 @@
                 '.$row["Rolle"].'</option>');
                 }
             }
+         
             echo ("</select></br>");
+            
+            
             ?>
         </form>
 
@@ -68,20 +66,13 @@
                     <label for="weiblich">Weiblich</label><br>
                     Konfession: <input type="text" name="konfession" required /></br>
                     Staatsangehörigkeit: <input type="text" name="staatsangehörigkeit" required /></br>
+                    Adresse:</br>
+                    Straße: <input type="text" name="Straße" required /></br>
+                    Hausnummer: <input type="text" name="Hausnummer" required /></br>
+                    PLZ: <input type="text" name="PLZ" required /></br>
+                    Ort: <input type="text" name="Ort" required /></br>
                 ');
-
-                #Adresse
-                echo("Adresse:</br>");
-                echo ('<select name="adresse">');
-                $query = "SELECT * FROM `adresse`";
-                $result = $db->execute_query($query);
-
-                foreach ($result as $row) {
-                    echo ('<option value="'.$row["Adress_ID"].'">
-                    '.$row["Straße"].' '.$row["Hausnummer"].' '.$row["PLZ"].'</option>');
-                }
-                echo ("</select></br>");
-
+                
                 #Studiengang
                 if ($_POST["rolle"] == 1){                    
                     echo ("Studiengänge:</br>");
@@ -96,6 +87,7 @@
                     echo ("</select></br>");
                 }
         }
+        printf('<input type="hidden" id="rolle" name="rolle" value="%s">', $_POST["rolle"]);
             ?>
             </br>
             <input type="submit" name="submit1" value="einfügen"/>
@@ -105,47 +97,87 @@
         <?php
         if (isset($_POST["submit1"])){
 
-            $_POST["rolle"] = $_SESSION["rolle_temp"];
-
             #student oder dozent
-            if ($_POST["rolle"] == 1){
-                $rolle = "student";
-            }
-            elseif ($_POST["rolle"] == 2){
-                $rolle = "dozent";
-            }
-            elseif ($_POST["rolle"] == 3){
-                $rolle = "admin";
+            switch ($_POST["rolle"]){
+                case 1:
+                    $rolle = "student";
+                    break;
+                case 2:
+                    $rolle = "dozent";
+                    break;
+                case 3:
+                    $rolle = "admin";
+                    break;
             }
 
             if ($_POST["rolle"] != 3){
 
-                $query = sprintf("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'uni' AND TABLE_NAME = '%s'; ", $rolle);
-                $result = $db->execute_query($query);   
+                #Adresse
+                $query = 
+                    "SELECT `adresse`.`Adress_ID`, `adresse`.`Straße`, `adresse`.`Hausnummer`, `plz`.*
+                    FROM `adresse` 
+                        LEFT JOIN `plz` ON `adresse`.`PLZ` = `plz`.`PLZ`;";
+                $result = $db->execute_query($query);
+                $new_adresse = true;
+                $new_PLZ = true;
+                
 
-                foreach ($result as $row) {
-                    $Person_ID = $row["AUTO_INCREMENT"];
+                foreach ($result as $row) {  
+                    if ($row["PLZ"] == $_POST["PLZ"] && $row["Ort"] == $_POST["Ort"]){
+                        $new_PLZ = false;
+                    }
+                    if ($row["Straße"] == $_POST["Straße"] && $row["Hausnummer"] == $_POST["Hausnummer"] && $row["PLZ"] == $_POST["PLZ"] && $row["Ort"] == $_POST["Ort"]) {
+                        $new_adresse = false;
+                        $adresse = $row["Adress_ID"];
+                    }
+                    
+                }
+                
+                #Neuer Ort falls keiner vorhanden
+                if ($new_PLZ){
+                    $query = sprintf("INSERT INTO `plz` (`PLZ`, `Ort`) VALUES ('%s', '%s') ", $_POST["PLZ"], $_POST["Ort"]);
+
+                    if ($db->execute_query($query) === true) {
+                        echo ("PLZ success </br>");
+                    }
+                    else {
+                        echo ($db->error);
+                    }
                 }
 
+                #adresse hinzufügen
+                if ($new_adresse){
+                    $query = sprintf ("INSERT INTO `adresse` (`Adress_ID`, `Straße`, `Hausnummer`, `PLZ`) 
+                                        VALUES (NULL, '%s', '%s', '%s') ", $_POST["Straße"], $_POST["Hausnummer"], $_POST["PLZ"]); 
+
+                    if ($db->execute_query($query) === true) {
+                        echo ("Adrese success </br>");
+                        $adresse = $db->insert_id;
+                    }
+                    else {
+                        echo ($db->error);
+                    }
+                }
+                 
                 #query auswahl
                 if ($_POST["rolle"] == 1){
 
                     #student insert
                     $query = sprintf("INSERT INTO `student` (`Matrikelnummer`, `Name`, `Vorname`, `Geburtsdatum`, `Geschlecht`, `Konfession`, `Staatsangehörigkeit`, `Adress_ID`, `Studi_ID`) 
-                    VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ", 
-                    $Person_ID, $_POST["name"], $_POST["vorname"], $_POST["geburtstag"], $_POST["geschlecht"], $_POST["konfession"], $_POST["staatsangehörigkeit"], $_POST["adresse"], $_POST["studiengang"]);
+                    VALUES ('NULL', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ", 
+                    $_POST["name"], $_POST["vorname"], $_POST["geburtstag"], $_POST["geschlecht"], $_POST["konfession"], $_POST["staatsangehörigkeit"], $adresse, $_POST["studiengang"]);
                 }
                 elseif ($_POST["rolle"] == 2){
 
                     #dozent insert
                     $query = sprintf("INSERT INTO `dozent` (`Dozi_ID`, `Name`, `Vorname`, `Geburtsdatum`, `Geschlecht`, `Konfession`, `Staatsangehörigkeit`, `Adress_ID`) 
-                    VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ", 
-                    $Person_ID, $_POST["name"], $_POST["vorname"], $_POST["geburtstag"], $_POST["geschlecht"], $_POST["konfession"], $_POST["staatsangehörigkeit"], $_POST["adresse"]);
+                    VALUES ('NULL', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ", 
+                    $_POST["name"], $_POST["vorname"], $_POST["geburtstag"], $_POST["geschlecht"], $_POST["konfession"], $_POST["staatsangehörigkeit"], $adresse);
                 }
                 
                 #einfügen
                 if ($db->execute_query($query) === true) {
-                    echo ("$rolle success</br>");
+                    echo ('rolle success</br>');
                 }
                 else {
                     echo ($db->error);
@@ -153,37 +185,30 @@
             }
             
             #benutzer_ID einfügen
-            $query = ("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'uni' AND TABLE_NAME = 'benutzer_ID'; ");
-            $result = $db->execute_query($query);   
-
-            foreach ($result as $row) {
-                $Ben_ID = $row["AUTO_INCREMENT"];
-            }
-
-            if ($_POST["rolle"] == 1){
-                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', '%s', NULL)", $_POST["rolle"], $Person_ID); 
-            }
-            elseif ($_POST["rolle"] == 2){
-                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', NULL, '%s')", $_POST["rolle"], $Person_ID); 
-            }
-            elseif ($_POST["rolle"] == 3){
-                $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ($Ben_ID, '%s', NULL, Null)", $_POST["rolle"]); 
+            $Person_ID = $db->insert_id;
+            
+            switch ($_POST["rolle"]){
+                case 1:
+                    $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ('NULL', '%s', '%s', NULL)", $_POST["rolle"], $Person_ID); 
+                    break;
+                case 2:
+                    $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ('NULL', '%s', NULL, '%s')", $_POST["rolle"], $Person_ID); 
+                    break;
+                case 3:
+                    $query = sprintf("INSERT INTO `benutzer_id` (`Ben_ID`, `Roll_ID`, `student_ID`, `dozent_ID`) VALUES ('NULL', '%s', NULL, Null)", $_POST["rolle"]); 
+                    break;
             }
 
             if ($db->execute_query($query) === true) {
                 echo ("benutzer success</br>");
                 $random = rand();
+                $Ben_ID = $db->insert_id;
                 echo ("<a href='http://localhost/registrieren.php?ID=".hash_hmac('sha256', $Ben_ID, $random)."'>Registrieren</a></br>");
                 echo ("Admin Code: ".$random);
             }
             else {
                 echo ($db->error);
             } 
-
-            $_SESSION["rolle_temp"] = NULL;
-        }
-        else{
-            $_SESSION["rolle_temp"] = $_POST["rolle"];
         }
         ?>
     </body>

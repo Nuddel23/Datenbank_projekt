@@ -9,9 +9,9 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 - studenten studiengang, module und Veranstalltungen anzeigen lassen
 
 ## am machen 
-- module einfügen
 
 ## erledigt
+- module einfügen
 - studiengang einfügen
 - Login
 - studenten, dozenten und admins einfügen
