@@ -11,7 +11,7 @@
             session_start();
             require $_SERVER['DOCUMENT_ROOT']."/Datenbank.php";
             
-            $AdminOnly = false;
+            $AdminOnly = true;
             require $_SERVER['DOCUMENT_ROOT']."/Anmelden.php";
         ?>
         <form method="post" action="">    
