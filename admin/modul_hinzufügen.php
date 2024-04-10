@@ -37,34 +37,37 @@
         <h1>Modul hinzufügen:</h1>
         <form method="post" action="">
             <?php
-            #TODO in studiengang umwandeln
+            #Studiengang auswahl
                 $query = "SELECT * FROM `studiengang`";
                 $result = $db->execute_query($query);
 
+                print_r($_POST);
+
                 foreach ($result as $row) {
-                    echo sprintf('<input type="radio" id="%s" name="studiengang" value="%s" required >
-                        <label for="%s">%s</label></br>', $row["Bezeichnung"], $row["Modul_ID"], $row["Bezeichnung"], $row["Bezeichnung"]);
+                    echo sprintf('<input type="checkbox" id="%s" name="studiengang[]" value="%s">
+                        <label for="%s">%s</label></br>', $row["Bezeichnung"], $row["Studi_ID"], $row["Bezeichnung"], $row["Bezeichnung"]);
                 }
 
-            #TODO in Semester umwandeln
-            echo("Studiengang: ");
+            #Semester auswahl
+            echo("Semester: ");
             echo ('<select name="Semester">'); 
             
-            $query = "SELECT * FROM `studiengang`";
+            $query = "SELECT * FROM `semester`";
             $result = $db->execute_query($query);
 
             foreach ($result as $row) {
-                if (isset($_POST["studiengang"]) == false){
-                    $_POST["studiengang"] = $row["Studi_ID"];
+                if (isset($_POST["Semi_ID"]) == false){
+                    $_POST["Semi_ID"] = $row["Semi_ID"];
                 }
+                
 
-                if ($row["Studi_ID"] == $_POST["studiengang"]){
-                    echo ('<option selected="selected" value="'.$row["Studi_ID"].'">
-                '.$row["Bezeichnung"].'</option>');
+                if ($row["Semi_ID"] == $_POST["Semi_ID"]){
+                    echo ('<option selected="selected" value="'.$row["Semi_ID"].'">
+                '.$row["Semester"]." ".$row["Jahr"].'</option>');
                 }
                 else{
-                    echo ('<option value="'.$row["Studi_ID"].'">
-                '.$row["Bezeichnung"].'</option>');
+                    echo ('<option value="'.$row["Semi_ID"].'">
+                '.$row["Semester"]." ".$row["Jahr"].'</option>');
                 }
             }
             echo ("</select></br>");
@@ -77,32 +80,49 @@
  
                 #Prüfen ob es das Modul schon gibt
                 $query = 
-                    "SELECT * FROM `modul`";
+                    "SELECT `modul`.`Bezeichnung`, `beinhaltet`.*
+                    FROM `modul` 
+                        LEFT JOIN `beinhaltet` ON `beinhaltet`.`Modul_ID` = `modul`.`Modul_ID`;";
                 $result = $db->execute_query($query);
 
                 foreach ($result as $row) {  
-                    if ($row["Bezeichnung"] == $_POST["Modul_name"]) {
-                        echo ("Modul exestiert bereits </br>");
-                        exit;
+                    foreach ($_POST["studiengang"] as $studiengang){
+                        if ($row["Bezeichnung"] == $_POST["Modul_name"] && $row["Studi_ID"] == $studiengang) {
+                            echo ("Modul exestiert bereits </br>");
+                            exit;
+                        }
                     }
                 }
 
                 #Addresse einfügen
-                $query = sprintf("INSERT INTO `modul` (`Modul_ID`, `Bezeichnung`) VALUES (NULL, '%s')", $_POST["Modul_name"]);
-
-                if ($db->execute_query($query) === true) {
-                    echo ("PLZ success </br>");
-                }
-                else {
-                    echo ($db->error);
-                }
-
                 $query = sprintf("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'uni' AND TABLE_NAME = 'modul'; ");
                 $result = $db->execute_query($query);   
 
                 foreach ($result as $row) {
                     $Modul_ID = $row["AUTO_INCREMENT"];
                 }
+
+                $query = sprintf("INSERT INTO `modul` (`Modul_ID`, `Bezeichnung`) VALUES ('%s', '%s')",$Modul_ID, $_POST["Modul_name"]);
+
+                if ($db->execute_query($query) === true) {
+                    echo ("Modul success </br>");
+                }
+                else {
+                    echo ($db->error);
+                }
+
+                #beinhaltet einfügen
+                foreach ($_POST["studiengang"] as $studiengang){
+                    $query = sprintf("INSERT INTO `beinhaltet` (`Studi_ID`, `Modul_ID`, `Semester`) VALUES ('%s', '%s', '%s') ", $studiengang, $Modul_ID, $_POST["Semi_ID"]);
+
+                    if ($db->execute_query($query) === true) {
+                        echo ("beinhaltet success </br>");
+                    }
+                    else {
+                        echo ($db->error);
+                    }
+                }
+
             }
         ?>
     </body>
