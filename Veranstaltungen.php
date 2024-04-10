@@ -17,22 +17,8 @@
                 session_start();
                 require $_SERVER['DOCUMENT_ROOT']."/Datenbank.php";
 
-                #Abmelden Knopf
-                if (isset($_POST["Abmelden"])){
-                    $_SESSION['login'] = false;
-                }
-            
-                #Abmelden
-                if ($_SESSION['login'] == false){
-                    $_SESSION = array();
-                    header("Location: index.php");
-                    exit;
-                }
-
-                #Admin Panel
-                if ($_SESSION["Roll_ID"] == 3){
-                    echo ('<a href="admin_page.php">Admin Panel</a>');
-                }
+                $AdminOnly = false;
+                require $_SERVER['DOCUMENT_ROOT']."/Anmelden.php";
 
                 echo ('<div class="calender">');
                 #Zeiten

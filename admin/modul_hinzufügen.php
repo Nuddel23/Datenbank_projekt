@@ -10,24 +10,10 @@
             #Setup
             session_start();
             require $_SERVER['DOCUMENT_ROOT']."/Datenbank.php";
-            
-            #Abmelden Knopf
-            if (isset($_POST["Abmelden"])){
-                $_SESSION['login'] = false;
-            }
-            
-            #Abmelden
-            if ($_SESSION['login'] == false){
-                $_SESSION = array();
-                header("Location: /../index.php");
-                exit;
-            }
 
-            #nur Admin
-            if ($_SESSION["Roll_ID"] != 3){
-                echo ("<h1><Center>Du bist kein Admin</Center></h1>");
-                exit;
-            }
+            $AdminOnly = true;
+            require $_SERVER['DOCUMENT_ROOT']."/Anmelden.php";
+            
         ?>
         <form method="post" action="">    
             <input type="submit" name="Abmelden" value="Abmelden"/>
@@ -40,8 +26,6 @@
             #Studiengang auswahl
                 $query = "SELECT * FROM `studiengang`";
                 $result = $db->execute_query($query);
-
-                print_r($_POST);
 
                 foreach ($result as $row) {
                     echo sprintf('<input type="checkbox" id="%s" name="studiengang[]" value="%s">

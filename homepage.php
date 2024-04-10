@@ -11,17 +11,8 @@
             session_start();
             require $_SERVER['DOCUMENT_ROOT']."/Datenbank.php";
 
-            #Abmelden Knopf
-            if (isset($_POST["Abmelden"])){
-                $_SESSION['login'] = false;
-            }
-            
-            #Abmelden
-            if ($_SESSION['login'] == false){
-                $_SESSION = array();
-                header("Location: index.php");
-                exit;
-            }
+            $AdminOnly = false;
+            require $_SERVER['DOCUMENT_ROOT']."/Anmelden.php";
 
             echo ("<h1><Center>Hallo ");
 
