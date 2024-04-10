@@ -70,7 +70,7 @@
                 echo ('</br><a href="admin/benutzer_hinzufügen.php">Benuter erstellen </a>');
                 echo ('</br><a href="admin/adresse_hinzufügen.php">Adrese hinzufügen </a>');
                 echo ('</br><a href="admin/studiengang_hinzufügen.php">Studiengang hinzufügen </a>');
-                echo ('</br><a href="admin/modul_bearbeiten.php">Modul bearbeiten </a>');
+                echo ('</br><a href="admin/modul_hinzufügen.php">Modul hinzufügen </a>');
             }
             else {
                 echo ('</br><a href="Veranstaltungen.php">Veranstaltungen </a> ');
