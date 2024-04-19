@@ -10,7 +10,10 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 
 ## am machen 
 
+
 ## erledigt
+- Veranstalltungen anzeigen
+- noch nicht gemachte Veranstaltungen anzeigen
 - module einfügen
 - studiengang einfügen
 - Login
