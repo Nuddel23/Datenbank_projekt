@@ -54,6 +54,14 @@
                             echo "$key: $val <br/>";
                         }
                         echo ("</br></div></div></div></div>");
+                        echo("ende geplant");
+                    }
+                    elseif ($row["KonVer_ID"] == NULL && strtotime($row["Datum"]) == NULL) {
+                        echo ('<div class="day"><div class="event"><div class="event start-2 end-5 securities"><div class="title"></br>');
+                        foreach($row as $key => $val){
+                            echo "$key: $val <br/>";
+                        }
+                        echo ("</br></div></div></div></div>");
                     }
                     echo ('</div>');
                 }
