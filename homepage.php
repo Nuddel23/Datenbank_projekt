@@ -51,19 +51,22 @@
                 #print_r($row);
             }
         ?>
-
         <form method="post" action="">    
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from>
         <?php            
-            #Admin Panel
-            if ($_SESSION["Roll_ID"] == 3){
-                echo ('</br><a href="admin/benutzer_hinzufügen.php">Benuter erstellen </a>');
-                echo ('</br><a href="admin/studiengang_hinzufügen.php">Studiengang hinzufügen </a>');
-                echo ('</br><a href="admin/modul_hinzufügen.php">Modul hinzufügen </a>');
-            }
-            else {
-                echo ('</br><a href="Veranstaltungen.php">Veranstaltungen </a> ');
+            #auf Rolle basierte Seiten
+            switch($_SESSION["Roll_ID"]){
+                case 1: //student
+                    echo ('</br><a href="Veranstaltungen.php">Veranstaltungen </a> ');
+                    break;
+                case 2: //dozent
+                    break;
+                case 3: //admin
+                    echo ('</br><a href="admin/benutzer_hinzufügen.php">Benuter erstellen </a>');
+                    echo ('</br><a href="admin/studiengang_hinzufügen.php">Studiengang hinzufügen </a>');
+                    echo ('</br><a href="admin/modul_hinzufügen.php">Modul hinzufügen </a>');
+                    break;
             }
         ?>
     </body>

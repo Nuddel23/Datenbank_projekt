@@ -4,13 +4,14 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 # Todo
 
 ## evtl.
-- Homepage überarbeiten
-- CP in Quicklinks einbauen
-- Veranstalltungen in Noten einbauen
-- Verpasste Veranstalltungen anzeigen
+- none  Homepage überarbeiten
+- none  CP in Quicklinks einbauen
+- none  Veranstalltungen in Noten einbauen
+- none  Verpasste Veranstalltungen anzeigen
 - 10p   Klaender ansicht
 - 5p    Ladebalken
-- Studiengang + Modul + Veranstalltung erstellen auf einer Seite
+- none  Studiengang + Modul + Veranstalltung erstellen auf einer Seite
+- none  Modul bearbeiten
 
 ## geplant
 - max   dozenten konkrete Veranstalltungen erstellen lassen
