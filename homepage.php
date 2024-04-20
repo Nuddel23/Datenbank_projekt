@@ -66,6 +66,7 @@
                     echo ('</br><a href="admin/benutzer_hinzufügen.php">Benuter erstellen </a>');
                     echo ('</br><a href="admin/studiengang_hinzufügen.php">Studiengang hinzufügen </a>');
                     echo ('</br><a href="admin/modul_hinzufügen.php">Modul hinzufügen </a>');
+                    echo ('</br><a href="admin/veranstaltungen_hinzufügen.php">Veranstaltung hinzufügen </a>');
                     break;
             }
         ?>

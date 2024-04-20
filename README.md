@@ -14,6 +14,7 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 - none  Modul bearbeiten
 
 ## geplant
+- fix   studenten sehen alle Veranstalltungen selbst die nicht in ihrem studiengang sind
 - max   dozenten konkrete Veranstalltungen erstellen lassen
 - 15p   Noten der Stunden anzeigen: 1. Studiengänge 2. Module
 - 10p   Dozenten nach Studenten suchen lassen + Noten der Schüler
@@ -22,9 +23,9 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 
 ## am machen 
 
-- max   admin Veranstalltungen erstellen
 
 ## erledigt
+- max   admin Veranstalltungen erstellen
 - Veranstalltungen anzeigen
 - noch nicht gemachte Veranstaltungen anzeigen
 - module einfügen
