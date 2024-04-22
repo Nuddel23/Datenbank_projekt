@@ -37,9 +37,8 @@
                     ";
                 
                 $result = $db->execute_query($query);
-                #print_r ($result);
+                
                 foreach ($result as $row){
-                    #print_r($row);
                     if ($benutzer["Matrikelnummer"] == $row["Matrikelnummer"]){
                         echo ('<div class="day"><div class="event"><div class="event start-2 end-5 securities"><div class="title"></br>');
                         foreach($row as $key => $val){
