@@ -17,10 +17,12 @@
         <form method="post" action="">    
             <input type="submit" name="Abmelden" value="Abmelden"/>
         </from> 
+        <a href="/../homepage.php">Homepage</a></br>
+        <h1>Veranstaltung erstellem:</h1>
             <?php
 
             #Studiengang auswahl
-            echo("</br></br>Studiengang:");
+            echo("Studiengang:");
             echo ('<select name="Studi_ID" onchange="this.form.submit()">'); 
             
             $query = "SELECT * FROM `studiengang`";
@@ -79,7 +81,7 @@
 
             foreach ($result as $row) {
                 echo ('<option value="'.$row["Art_ID"].'">
-                '.$row["Bezeichnung"].'</option>');
+                '.$row["Bezeichnung_art"].'</option>');
             }
             echo ("</select></br>");
             

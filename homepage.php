@@ -67,7 +67,7 @@
                     echo ('</br><a href="admin/studiengang_hinzufügen.php">Studiengang hinzufügen </a>');
                     echo ('</br><a href="admin/modul_hinzufügen.php">Modul hinzufügen </a>');
                     echo ('</br><a href="admin/veranstaltungen_hinzufügen.php">Veranstaltung hinzufügen </a>');
-                    echo ('</br><a href="admin/konkrete_veranstaltungen_hinzufügen.php">Veranstaltung hinzufügen </a>');
+                    echo ('</br><a href="admin/konkrete_veranstaltungen_hinzufügen.php">konkret Veranstaltung hinzufügen </a>');
                     break;
             }
         ?>

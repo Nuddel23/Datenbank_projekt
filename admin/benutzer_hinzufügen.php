@@ -97,19 +97,6 @@
         <?php
         if (isset($_POST["submit1"])){
 
-            #student oder dozent
-            switch ($_POST["rolle"]){
-                case 1:
-                    $rolle = "student";
-                    break;
-                case 2:
-                    $rolle = "dozent";
-                    break;
-                case 3:
-                    $rolle = "admin";
-                    break;
-            }
-
             if ($_POST["rolle"] != 3){
 
                 #Adresse
