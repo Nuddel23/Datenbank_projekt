@@ -15,16 +15,16 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 
 ## geplant
 - fix   studenten sehen alle Veranstalltungen selbst die nicht in ihrem studiengang sind
-- max   studenten müssen sich in konkrete Veranstaltungen eintragen können
 - 15p   Noten der Stunden anzeigen: 1. Studiengänge 2. Module
 - 10p   Dozenten nach Studenten suchen lassen + Noten der Schüler
 - 5p    Quicklinks: für Studenten studiengang, module und Veranstalltungen anzeigen lassen
 - 5p    Gesamte Cp Studenten anzeigen
 
 ## am machen 
-- max   admins konkrete Veranstalltungen erstellen lassen
+- max   studenten müssen sich in konkrete Veranstaltungen eintragen können
 
 ## erledigt
+- max   admins konkrete Veranstalltungen erstellen lassen
 - max   admin Veranstalltungen erstellen
 - Veranstalltungen anzeigen
 - noch nicht gemachte Veranstaltungen anzeigen
