@@ -23,42 +23,39 @@
         <a href="/../homepage.php">Homepage</a></br>
         <h1>Benutzer erstellen:</h1>
 
-        <!-- Rolle auswahl -->
-        <form method="POST" action="">
-            <?php
+        <?php
 
-            #Rolle
-            echo ("Rolle:</br>");
-            echo ('<select name="rolle" onchange="this.form.submit()">');
+        #Rolle auswahl
+        echo ('
+                <form method="POST" action="">
+                Rolle: <select name="rolle" onchange="this.form.submit()">');
 
-            $query = "SELECT * FROM `rollen`";
-            $result = $db->execute_query($query);
+        $query = "SELECT * FROM `rollen`";
+        $result = $db->execute_query($query);
 
-            if (isset($_POST["rolle"]) == false) {
-                $_POST["rolle"] = 1;
-            }
+        if (isset($_POST["rolle"]) == false) {
+            $_POST["rolle"] = 1;
+        }
 
-            foreach ($result as $row) {
-                if ($row["Roll_ID"] == $_POST["rolle"]) {
-                    echo ('<option selected="selected" value="' . $row["Roll_ID"] . '">
+        foreach ($result as $row) {
+            if ($row["Roll_ID"] == $_POST["rolle"]) {
+                echo ('<option selected="selected" value="' . $row["Roll_ID"] . '">
                 ' . $row["Rolle"] . '</option>');
-                } else {
-                    echo ('<option value="' . $row["Roll_ID"] . '">
+            } else {
+                echo ('<option value="' . $row["Roll_ID"] . '">
                 ' . $row["Rolle"] . '</option>');
-                }
             }
+        }
 
-            echo ("</select></br>");
+        echo ("</select></br></form>");
 
 
-            ?>
-        </form>
 
-        <!-- Daten eintragen -->
-        <form method="POST" action="">
-            <?php
-            if ($_POST["rolle"] != 3) {
-                echo (' Name: <input type="text" name="name" required /></br>
+        #Daten eintragen
+        echo ('<form method="POST" action="">');
+
+        if ($_POST["rolle"] != 3) {
+            echo (' Name: <input type="text" name="name" required /></br>
                     Vorname: <input type="text" name="vorname" required /></br>
                     Geburtsdatum: <input type="date" name="geburtstag" required /></br>
                     <input type="radio" id="mänlich" name="geschlecht" value="mänlich" required >
@@ -74,28 +71,28 @@
                     Ort: <input type="text" name="Ort" required /></br>
                 ');
 
-                #Studiengang
-                if ($_POST["rolle"] == 1) {
-                    echo ("Studiengänge:</br>");
-                    echo ('<select name="studiengang">');
-                    $query = "SELECT * FROM `studiengang`";
-                    $result = $db->execute_query($query);
+            #Studiengang
+            if ($_POST["rolle"] == 1) {
+                echo ("Studiengänge:</br>");
+                echo ('<select name="studiengang">');
+                $query = "SELECT * FROM `studiengang`";
+                $result = $db->execute_query($query);
 
-                    foreach ($result as $row) {
-                        echo ('<option value="' . $row["Studi_ID"] . '">
+                foreach ($result as $row) {
+                    echo ('<option value="' . $row["Studi_ID"] . '">
                         ' . $row["Bezeichnung"] . '</option>');
-                    }
-                    echo ("</select></br>");
                 }
+                echo ("</select></br>");
             }
-            printf('<input type="hidden" id="rolle" name="rolle" value="%s">', $_POST["rolle"]);
-            ?>
-            </br>
+        }
+        printf('<input type="hidden" id="rolle" name="rolle" value="%s">', $_POST["rolle"]);
+        echo ('
             <input type="submit" name="submit1" value="einfügen" />
-        </form>
+            </form>');
 
-        <!-- Daten verarbeiten -->
-        <?php
+
+
+        #Daten verarbeiten
         if (isset($_POST["submit1"])) {
 
             if ($_POST["rolle"] != 3) {
