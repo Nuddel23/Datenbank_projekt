@@ -21,9 +21,10 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 - 5p    Gesamte Cp Studenten anzeigen
 
 ## am machen 
-- max   studenten müssen sich in konkrete Veranstaltungen eintragen können
+
 
 ## erledigt
+- max   studenten müssen sich in konkrete Veranstaltungen eintragen können
 - max   admins konkrete Veranstalltungen erstellen lassen
 - max   admin Veranstalltungen erstellen
 - Veranstalltungen anzeigen
