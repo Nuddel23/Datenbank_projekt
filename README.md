@@ -4,6 +4,7 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 # Todo
 
 ## evtl.
+- none  Modul abschliessen mit Abschluss Prüfung
 - none  Homepage überarbeiten
 - none  CP in Quicklinks einbauen
 - none  Veranstalltungen in Noten einbauen
@@ -14,16 +15,15 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 - none  Modul bearbeiten
 
 ## geplant
-- fix   studenten sehen alle Veranstalltungen selbst die nicht in ihrem studiengang sind
-- 15p   Noten der Stunden anzeigen: 1. Studiengänge 2. Module
 - 10p   Dozenten nach Studenten suchen lassen + Noten der Schüler
 - 5p    Quicklinks: für Studenten studiengang, module und Veranstalltungen anzeigen lassen
 - 5p    Gesamte Cp Studenten anzeigen
 
 ## am machen 
 
-
 ## erledigt
+- 15p   Noten der Stunden anzeigen: 1. Studiengänge 2. Module
+- fix   studenten sehen alle Veranstalltungen selbst die nicht in ihrem studiengang sind
 - max   studenten müssen sich in konkrete Veranstaltungen eintragen können
 - max   admins konkrete Veranstalltungen erstellen lassen
 - max   admin Veranstalltungen erstellen

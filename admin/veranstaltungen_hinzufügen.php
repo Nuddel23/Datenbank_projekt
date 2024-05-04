@@ -23,16 +23,23 @@
         <h1>Veranstaltung erstellem:</h1>
         <?php
 
-        #Studiengang auswahl
-        echo ("Studiengang:");
-        echo ('<select name="Studi_ID" onchange="this.form.submit()">');
-
-        $query = "SELECT * FROM `studiengang`";
-        $result = $db->execute_query($query);
+        if (isset($_POST["Modul_ID"]) == false) {
+            $_POST["Modul_ID"] = 1;
+        }
 
         if (isset($_POST["Studi_ID"]) == false) {
             $_POST["Studi_ID"] = 1;
         }
+
+
+        #Studiengang auswahl
+        echo ("Studiengang:");
+        echo ('<form method="POST" action=""><select name="Studi_ID" onchange="this.form.submit()">');
+
+        $query = "SELECT * FROM `studiengang`";
+        $result = $db->execute_query($query);
+
+
 
         foreach ($result as $row) {
             if ($row["Studi_ID"] == $_POST["Studi_ID"]) {
@@ -43,9 +50,12 @@
                 ' . $row["Bezeichnung"] . '</option>');
             }
         }
-        echo ("</select></br>");
+        echo ("</select>");
+        printf('<input type="hidden" id="Modul_ID" name="Modul_ID" value="%s">', $_POST["Modul_ID"]);
+        echo ("</br></form>");
 
         #Modul auswahl
+        echo ('<form method="POST" action="">');
         echo ("Modul:");
         echo ('<select name="Modul_ID" onchange="this.form.submit()">');
 
@@ -56,9 +66,6 @@
             WHERE `studiengang`.`Studi_ID` = '%s';", $_POST["Studi_ID"]);
         $result = $db->execute_query($query);
 
-        if (isset($_POST["Modul_ID"]) == false) {
-            $_POST["Modul_ID"] = 1;
-        }
 
         foreach ($result as $row) {
             if ($row["Modul_ID"] == $_POST["Modul_ID"]) {
@@ -69,14 +76,17 @@
                 ' . $row["Bezeichnung"] . '</option>');
             }
         }
-        echo ("</select></br>");
+        echo ("</select>");
+        printf('<input type="hidden" id="Studi_ID" name="Studi_ID" value="%s">', $_POST["Studi_ID"]);
+        echo ("</br></form>");
         echo ('<form method="POST" action="">');
 
 
         #Veranstaltungsart
         echo ("Veranstaltungsart:");
         echo ('<select name="Art_ID">');
-        $query = "SELECT * FROM `veranstaltungsart`";
+        $query = "SELECT `veranstaltungsart`.`Bezeichnung` AS `Bezeichnung_art`, `veranstaltungsart`.`Art_ID`
+        FROM `veranstaltungsart`;";
         $result = $db->execute_query($query);
 
         foreach ($result as $row) {

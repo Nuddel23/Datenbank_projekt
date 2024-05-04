@@ -63,6 +63,7 @@
                 echo ('</br><a href="Veranstaltungen.php">Veranstaltungen </a> ');
                 break;
             case 2: //dozent
+                echo ('</br><a href="studentensuche.php">Studenten </a> ');
                 break;
             case 3: //admin
                 echo ('</br><a href="admin/benutzer_hinzufügen.php">Benuter erstellen </a>');
