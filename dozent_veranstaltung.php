@@ -23,32 +23,6 @@
         require $_SERVER['DOCUMENT_ROOT'] . "/Anmelden.php";
 
 
-        #daten Verarbeiten
-        if (isset($_POST["bevorstehend"])) {
-            $query = sprintf("INSERT INTO `student_konver` (`KonVer_ID`, `Matrikelnummer`, `Note`) VALUES ('%s', '%s', NULL) ", $_POST["KonVer_ID"], $_SESSION["benutzer"]["Matrikelnummer"]);
-
-            if ($db->execute_query($query) === true) {
-                echo ("Konkrete Veranstaltung eintragen success");
-
-            } else {
-                echo ($db->error);
-            }
-
-        }
-        if (isset($_POST["geplant"])) {
-            $query = sprintf("DELETE FROM student_konver WHERE `student_konver`.`KonVer_ID` = %s AND `student_konver`.`Matrikelnummer` = %s", $_POST["KonVer_ID"], $_SESSION["benutzer"]["Matrikelnummer"]);
-
-            if ($db->execute_query($query) === true) {
-                echo ("Konkrete Veranstaltung abmelden success");
-
-            } else {
-                echo ($db->error);
-            }
-        }
-
-
-
-
         #Daten abfragen
         // $query = "SELECT `student`.`Name`, `student_konver`.*, `konkrete_veranstaltung`.*, `veranstaltung`.`Bezeichnung` AS `Bezeichnung_ver`, `modul`.`Bezeichnung` AS `Bezeichnung_modul`, `studiengang`.`Bezeichnung` AS `Bezeichnung_studi`
         // FROM `student` 

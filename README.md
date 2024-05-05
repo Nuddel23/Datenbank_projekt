@@ -7,21 +7,23 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 - none  Modul abschliessen mit Abschluss Prüfung
 - none  Homepage überarbeiten
 - none  CP in Quicklinks einbauen
-- none  Veranstalltungen in Noten einbauen
-- none  Verpasste Veranstalltungen anzeigen
 - 10p   Klaender ansicht
 - 5p    Ladebalken
 - none  Studiengang + Modul + Veranstalltung erstellen auf einer Seite
 - none  Modul bearbeiten
 
+
 ## geplant
+- none  Login wieder automatisch weiterleiten
 - 10p   Dozenten nach Studenten suchen lassen + Noten der Schüler
-- 5p    Quicklinks: für Studenten studiengang, module und Veranstalltungen anzeigen lassen
 - 5p    Gesamte Cp Studenten anzeigen
+- none  dozenten alle ihre Veranstaltungen ansehen lassen
 
 ## am machen 
 
 ## erledigt
+- 5p    Quicklinks: für Studenten studiengang, module und Veranstalltungen anzeigen lassen
+- none  Verpasste Veranstalltungen anzeigen
 - 15p   Noten der Stunden anzeigen: 1. Studiengänge 2. Module
 - fix   studenten sehen alle Veranstalltungen selbst die nicht in ihrem studiengang sind
 - max   studenten müssen sich in konkrete Veranstaltungen eintragen können

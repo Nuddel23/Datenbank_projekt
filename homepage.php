@@ -61,9 +61,10 @@
         switch ($_SESSION["Roll_ID"]) {
             case 1: //student
                 echo ('</br><a href="Veranstaltungen.php">Veranstaltungen </a> ');
+                echo ('</br><a href="quicklinks.php">Quicklinks zu allen Veranstaltungen </a> ');
                 break;
             case 2: //dozent
-                echo ('</br><a href="studentensuche.php">Studenten </a> ');
+                echo ('</br><a href="dozent_veranstaltung.php">Veranstalltungen </a> ');
                 break;
             case 3: //admin
                 echo ('</br><a href="admin/benutzer_hinzufügen.php">Benuter erstellen </a>');
