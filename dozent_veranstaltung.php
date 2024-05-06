@@ -23,16 +23,29 @@
         require $_SERVER['DOCUMENT_ROOT'] . "/Anmelden.php";
 
 
-        #Daten abfragen
-        // $query = "SELECT `student`.`Name`, `student_konver`.*, `konkrete_veranstaltung`.*, `veranstaltung`.`Bezeichnung` AS `Bezeichnung_ver`, `modul`.`Bezeichnung` AS `Bezeichnung_modul`, `studiengang`.`Bezeichnung` AS `Bezeichnung_studi`
-        // FROM `student` 
-        //     LEFT JOIN `student_konver` ON `student_konver`.`Matrikelnummer` = `student`.`Matrikelnummer` 
-        //     LEFT JOIN `konkrete_veranstaltung` ON `student_konver`.`KonVer_ID` = `konkrete_veranstaltung`.`KonVer_ID` 
-        //     LEFT JOIN `veranstaltung` ON `konkrete_veranstaltung`.`Veranstaltungs_ID` = `veranstaltung`.`Veranstaltungs_ID` 
-        //     LEFT JOIN `modul` ON `veranstaltung`.`Modul_ID` = `modul`.`Modul_ID` 
-        //     LEFT JOIN `studiengang` ON `student`.`Studi_ID` = `studiengang`.`Studi_ID`;";
+        if (isset($_POST["Note"])) {
+            $query = sprintf(
+                "UPDATE `student_konver` SET `KonVer_ID` = '%s', `Matrikelnummer` = '%s', `Note` = '%s' WHERE `student_konver`.`KonVer_ID` = %s AND `student_konver`.`Matrikelnummer` = %s ",
+                $_POST["KonVer_ID"],
+                $_POST["Matrikelnummer"],
+                $_POST["Note"],
+                $_POST["KonVer_ID"],
+                $_POST["Matrikelnummer"]
+            );
 
-        $query = "SELECT `konkrete_veranstaltung`.*, `veranstaltung`.`Bezeichnung`, `student_konver`.*, `student`.`Name`
+            if ($db->execute_query($query) === true) {
+                echo ('Note success</br>');
+            } else {
+                echo ($db->error);
+            }
+        }
+
+
+
+
+
+
+        $query = "SELECT `konkrete_veranstaltung`.*, `veranstaltung`.`Bezeichnung`, `student_konver`.*, `student`.*
         FROM `konkrete_veranstaltung` 
             LEFT JOIN `veranstaltung` ON `konkrete_veranstaltung`.`Veranstaltungs_ID` = `veranstaltung`.`Veranstaltungs_ID` 
             LEFT JOIN `student_konver` ON `student_konver`.`KonVer_ID` = `konkrete_veranstaltung`.`KonVer_ID` 
@@ -42,9 +55,21 @@
 
 
         # sotieren
-        $uni = array();
+        $student = array();
+        $ver = array();
 
         foreach ($result as $row) {
+            $student[$row["KonVer_ID"]][$row["Vorname"]." ".$row["Name"]][$row["Matrikelnummer"]] = $row["Note"];
+        }
+        #print_r($student);
+
+        foreach ($result as $row) {
+            $ver[$row["KonVer_ID"]] = $row;
+        }
+        #print_r($ver);
+
+
+        foreach ($ver as $row) {
             echo ('<div class="event start-2 end-5 securities"><div class="title"><fieldset>');
             foreach ($row as $key => $val) {
                 // echo "$key: $val <br/>";
@@ -55,111 +80,48 @@
                     case "Datum":
                         echo ("Datum: " . $val . "</br>");
                         break;
-                    case "Name":
-                        echo ("Student: " . $val . "</br>");
+                    case "KonVer_ID":
+                        echo ("Student: <ul>");
+                        foreach ($student[$val] as $stu => $nr) {
+                            echo ("<li>" . $stu . "</br></li>");
+                            if (strtotime($row["Datum"]) < time()) {
+                                echo ('
+                                <form method="POST" action="">
+                                Note: <select name="Note" onchange="this.form.submit()">');
+
+                                for ($i = 1; $i < 6; $i++) {
+                                    foreach ($nr as $nr_key => $note) {
+                                        if ($i == $note) {
+                                            echo ('<option selected="selected" value="' . $i . '">
+                                        ' . $i . '</option>');
+                                        } 
+                                        else {
+                                            echo ('<option value="' . $i . '">
+                                        ' . $i . '</option>');
+                                        }
+                                    }
+                                }
+                                if ($note == NULL) {
+                                    echo ('<option selected="selected" value="' . NULL . '">
+                                ' . NULL . '</option>');
+                                } else {
+                                    echo ('<option value="' . NULL . '">
+                                ' . NULL . '</option>');
+                                }
+
+
+                                echo ("</select>");
+                                printf('<input type="hidden" name="KonVer_ID" value="%s">', $val);
+                                printf('<input type="hidden" name="Matrikelnummer" value="%s">', $nr_key);
+                                echo ("</br></form>");
+                            }
+                        }
+                        echo ("</ul>");
                         break;
                 }
             }
             echo ("</fieldset></div></div>");
-                    
-            // if ($key == "Note" && $val != "") {
-            //     echo ("Note: " . $val . "</br>");
-            // }
-            // if ($v_key == "bevorstehend") {
-            //     printf('
-            //         <form method="POST" action="">
-            //         <input type="hidden" id="KonVer_ID" name="KonVer_ID" value="%s">
-            //         <input type="submit" name="%s" value="eintragen"/>
-            //         </form>',
-            //         $row["KonVer_ID"],
-            //         $v_key
-            //     );
-            // }
-            // if ($v_key == "geplant") {
-            //     printf('
-            //         <form method="POST" action="">
-            //         <input type="hidden" id="KonVer_ID" name="KonVer_ID" value="%s">
-            //         <input type="submit" name="%s" value="abmelden"/>
-            //         </form>',
-            //         $row["KonVer_ID"],
-            //         $v_key
-            //     );
-            // }
-        }/*
-
-
-
-
-            if ($_SESSION["benutzer"]["Dozi_ID"] == $row["Dozi_ID"]) {
-                $uni[$row["Bezeichnung_studi"]][$row["Bezeichnung_modul"]][$row["Bezeichnung_ver"]][] = $row;
-
-                // if ($_SESSION["benutzer"]["Matrikelnummer"] == $row["Matrikelnummer"] && strtotime($row["Datum"]) < time()) {
-                //     $uni[$row["Bezeichnung_studi"]][$row["Bezeichnung_modul"]]["teilgenommen"][$row["Bezeichnung"]] = $row;
-                // } elseif ($_SESSION["benutzer"]["Matrikelnummer"] == $row["Matrikelnummer"] && strtotime($row["Datum"]) > time()) {
-                //     $uni[$row["Bezeichnung_studi"]][$row["Bezeichnung_modul"]]["geplant"][$row["Bezeichnung"]] = $row;
-                // } elseif ($row["Matrikelnummer"] == NULL && strtotime($row["Datum"]) > time()) {
-                //     $uni[$row["Bezeichnung_studi"]][$row["Bezeichnung_modul"]]["bevorstehend"][$row["Bezeichnung"]] = $row;
-                // } elseif ($row["KonVer_ID"] == NULL) {
-                //     $uni[$row["Bezeichnung_studi"]][$row["Bezeichnung_modul"]]["ungeplant"][$row["Bezeichnung"]] = $row;
-                // }
-            }
         }
-        #print_r($uni);
-        
-        #anzeigen
-        foreach ($uni as $s_key => $studiengang) {
-            printf("<details open><summary><b>Studiengang: %s</b> </summary><ul>", $s_key);
-            foreach ($studiengang as $m_key => $modul) {
-                printf("<li><details open><summary>Modul: %s </summary><ul>", $m_key);
-                foreach ($modul as $v_key => $Veranstaltung) {
-                    printf("<li><details open><summary>Veranstalltung: %s </summary><ul>", $v_key);
-                    foreach ($Veranstaltung as $row) {
-                        echo ('<div class="event start-2 end-5 securities"><div class="title"><fieldset>');
-                        foreach ($row as $key => $val) {
-                            // echo "$key: $val <br/>";
-                            switch ($key) {
-                                case "Bezeichnung_ver":
-                                    echo ("<legend>" . $val . "</legend>");
-                                    break;
-                                case "Datum":
-                                    echo ("Datum: " . $val . "</br>");
-                                    break;
-                                case "Name":
-                                    echo ("Student: " . $val . "</br>");
-                                    break;
-                            }
-                        }
-                        if ($key == "Note" && $val != "") {
-                            echo ("Note: " . $val . "</br>");
-                        }
-                        if ($v_key == "bevorstehend") {
-                            printf('
-                                <form method="POST" action="">
-                                <input type="hidden" id="KonVer_ID" name="KonVer_ID" value="%s">
-                                <input type="submit" name="%s" value="eintragen"/>
-                                </form>',
-                                $row["KonVer_ID"],
-                                $v_key
-                            );
-                        }
-                        if ($v_key == "geplant") {
-                            printf('
-                                <form method="POST" action="">
-                                <input type="hidden" id="KonVer_ID" name="KonVer_ID" value="%s">
-                                <input type="submit" name="%s" value="abmelden"/>
-                                </form>',
-                                $row["KonVer_ID"],
-                                $v_key
-                            );
-                        }
-                        echo ("</fieldset></div></div>");
-                    }
-                    echo ("</ul></details></li>");
-                }
-                echo ("</ul></details></li>");
-            }
-            echo ("</ul></details>");
-        }*/
 
         ?>
 </body>
