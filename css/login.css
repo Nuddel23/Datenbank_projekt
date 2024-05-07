@@ -1,20 +1,20 @@
 
 h1 {
     border-radius: 15px;
-    background-color: black;
+    background-color: rgb(211, 8, 8);
     padding: 20px; 
     width: 80px;
     height: 30px; 
     background-position: center;
+    left: 50%; 
+    top: 50%;
+    
   } 
-body {
-    color: rgb(255, 255, 255);
-    background-image: url("../img/hintergrund.jpg") ;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
 
-  }
+  body {
+
+}
+
   form{
     color:red;
     font-family: Arial, Helvetica, sans-serif;
@@ -22,9 +22,15 @@ body {
   }
   
   .login_fenster{
-    border: 10px ridge rgb(255, 255, 255);
-    background-color: rgb(0, 0, 0);
+    border: 10px ridge rgb(15, 11, 211);
     padding: 0.5rem;
     flex-direction: column;
     position: center;
+    background-image: url("../img/hintergrund.jpg") ;
+    background-size: cover;
+    position: fixed; 
+    left: 0px; 
+    top: 0px; 
+    z-index: 1;
+    background-repeat: no-repeat;
   }
