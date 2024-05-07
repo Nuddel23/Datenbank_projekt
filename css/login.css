@@ -1,26 +1,22 @@
 
 h1 {
-    border-radius: 15px;
     background-color: rgb(211, 8, 8);
-    padding: 20px; 
-    width: 80px;
-    height: 30px; 
     background-position: center;
     left: 50%; 
     top: 50%;
     
   } 
 
-  body {
-
+  .body {
+    Display: flex
 }
 
   form{
     color:red;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
+    font-size: 10px;
   }
-  
+
   .login_fenster{
     border: 10px ridge rgb(15, 11, 211);
     padding: 0.5rem;
@@ -28,9 +24,8 @@ h1 {
     position: center;
     background-image: url("../img/hintergrund.jpg") ;
     background-size: cover;
-    position: fixed; 
-    left: 0px; 
-    top: 0px; 
-    z-index: 1;
+    position: CENTER; 
     background-repeat: no-repeat;
+    left: 50%; 
+    top: 50%;
   }
