@@ -16,6 +16,7 @@
 
     $AdminOnly = true;
     require $_SERVER['DOCUMENT_ROOT'] . "/Anmelden.php";
+
     ?>
     <section class="header">
         <nav>
@@ -104,7 +105,7 @@
                 echo ('
                 <input type="text" placeholder="Name" name="name" required /></br>
                 <input type="text" placeholder="Vorname" name="vorname" required /></br>
-                <input type="date" placeholder="Geburtsdatum" name="geburtstag" required /></br>
+                <label for="date">  Geburtsdatum:</label> <input type="date" id="date" name="geburtstag" required /></br>
                 Geschlecht:
 
                 <label class="container">
@@ -153,7 +154,7 @@
             printf('<input type="hidden" id="rolle" name="rolle" value="%s">', $_POST["rolle"]);
             echo ('
             </br>
-            <input type="submit" name="submit1" value="einfügen" />
+            <input type="submit" name="submit1" value="hinzufügen" />
             </form>');
 
 

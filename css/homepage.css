@@ -83,11 +83,22 @@ nav img {
   text-align: center;
 }
 
-
-input[type=date],
+input[type=submit],
+input[type=number],
 input[type=text],
 input[type=Password] {
   width:80%;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: inline-block;
+  border: none;
+  background: rgba(211, 211, 211, 0.315);
+  border-radius: 10px;
+  color: white;
+}
+
+input[type=date]{
+  width:68%;
   padding: 15px;
   margin-bottom: 10px;
   display: inline-block;

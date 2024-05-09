@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/homepage.css?v=<?php echo time(); ?>">
     <title>Document</title>
 </head>
 
@@ -16,12 +17,59 @@
     $AdminOnly = true;
     require $_SERVER['DOCUMENT_ROOT'] . "/Anmelden.php";
     ?>
-    <form method="post" action="">
-        <input type="submit" name="Abmelden" value="Abmelden" />
-        </from>
-        <a href="/../homepage.php">Homepage</a></br>
-        <h1>Veranstaltung erstellem:</h1>
-        <?php
+    <section class="header">
+        <nav>
+            <a href="../homepage.php"><img src="../img/logo-2.png"></a>
+            <div class="nav-links">
+                <ul>
+                    <?php
+                    #auf Rolle basierte Seiten
+                    switch ($_SESSION["Roll_ID"]) {
+                        case 1: //student
+                            $query = "SELECT `student`.`Matrikelnummer`, `student_konver`.`Note`, `konkrete_veranstaltung`.`KonVer_ID`, `veranstaltung`.`CP`
+                                        FROM `student` 
+                                        LEFT JOIN `student_konver` ON `student_konver`.`Matrikelnummer` = `student`.`Matrikelnummer` 
+                                        LEFT JOIN `konkrete_veranstaltung` ON `student_konver`.`KonVer_ID` = `konkrete_veranstaltung`.`KonVer_ID` 
+                                        LEFT JOIN `veranstaltung` ON `konkrete_veranstaltung`.`Veranstaltungs_ID` = `veranstaltung`.`Veranstaltungs_ID`;";
+
+                            $stu = $db->execute_query($query);
+
+                            echo ('<li><a href="Veranstaltungen.php">Veranstaltungen </a></li> ');
+                            echo ('<li><a href="quicklinks.php">Quicklinks</a></li> ');
+
+                            $CP = 0;
+                            foreach ($stu as $row) {
+                                if ($row["Matrikelnummer"] == $_SESSION["benutzer"]['Matrikelnummer']) {
+                                    $CP += $row["CP"];
+                                }
+                            }
+                            echo ("<li><p> CP: " . $CP . "</p></li>");
+
+                            break;
+                        case 2: //dozent
+                            echo ('<li><a href="dozent_veranstaltung.php">Veranstalltungen </a></li> ');
+                            break;
+                        case 3: //admin
+                            echo ('<li><a href="benutzer_hinzufügen.php">Benuter erstellen </a></li>');
+                            echo ('<li><a href="studiengang_hinzufügen.php">Studiengang hinzufügen </a></li>');
+                            echo ('<li><a href="modul_hinzufügen.php">Modul hinzufügen </a></li>');
+                            echo ('<li><a href="veranstaltungen_hinzufügen.php">Veranstaltung hinzufügen </a></li>');
+                            echo ('<li><a href="konkrete_veranstaltungen_hinzufügen.php">konkret Veranstaltung hinzufügen </a></li>');
+                            break;
+                    }
+                    ?>
+                    <li><a href="../homepage.php">HOME</a></li>
+                    <li>
+                        <form method="post" action="">
+                            <input class="submitlink" type="submit" name="Abmelden" value="Abmelden" />
+                        </form>
+                    </li>
+                </ul>
+        </nav>
+        <div class="admin">
+            <h1>Veranstaltung hinzufügen</h1>
+            </br>
+            <?php
 
         if (isset($_POST["Modul_ID"]) == false) {
             $_POST["Modul_ID"] = 1;
@@ -33,8 +81,9 @@
 
 
         #Studiengang auswahl
-        echo ("Studiengang:");
-        echo ('<form method="POST" action=""><select name="Studi_ID" onchange="this.form.submit()">');
+        echo ('<form method="POST" action="">');
+        echo ('<label for="Studi_ID"> Studiengang:</label>');
+        echo('<select name="Studi_ID" onchange="this.form.submit()">');
 
         $query = "SELECT * FROM `studiengang`";
         $result = $db->execute_query($query);
@@ -43,10 +92,10 @@
 
         foreach ($result as $row) {
             if ($row["Studi_ID"] == $_POST["Studi_ID"]) {
-                echo ('<option selected="selected" value="' . $row["Studi_ID"] . '">
+                echo ('<option selected="selected" id="Studi_ID" value="' . $row["Studi_ID"] . '">
                 ' . $row["Bezeichnung"] . '</option>');
             } else {
-                echo ('<option value="' . $row["Studi_ID"] . '">
+                echo ('<option id="Studi_ID" value="' . $row["Studi_ID"] . '">
                 ' . $row["Bezeichnung"] . '</option>');
             }
         }
@@ -96,11 +145,9 @@
         echo ("</select></br>");
 
         ?>
-        Bezeichnung:
-        <input type="text" name="Bezeichnung"></input></br>
-        CP:
-        <input type="number" name="CP"></input></br>
-        <input type="submit" name="submit" value="einfügen" />
+        <input type="text" placeholder="Bezeichnung" name="Bezeichnung"></input></br>
+        <input type="number" placeholder="CP" name="CP"></input></br>
+        <input type="submit" name="submit" value="hinzufügen" />
     </form>
 
     <!-- Daten Verarbeiten -->
