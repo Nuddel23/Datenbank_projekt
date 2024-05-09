@@ -5,7 +5,6 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 
 ## evtl.
 - none  Modul abschliessen mit Abschluss Prüfung
-- none  Homepage überarbeiten
 - none  CP in Quicklinks einbauen
 - 10p   Klaender ansicht
 - 5p    Ladebalken
@@ -16,12 +15,13 @@ Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Unive
 ## geplant
 - none  Login wieder automatisch weiterleiten
 - 10p   Dozenten nach Studenten suchen lassen + Noten der Schüler
-- 5p    Gesamte Cp Studenten anzeigen
-- none  dozenten alle ihre Veranstaltungen ansehen lassen
 
 ## am machen 
 
 ## erledigt
+- none  Homepage überarbeiten
+- none  dozenten alle ihre Veranstaltungen ansehen lassen
+- 5p    Gesamte Cp Studenten anzeigen
 - 5p    Quicklinks: für Studenten studiengang, module und Veranstalltungen anzeigen lassen
 - none  Verpasste Veranstalltungen anzeigen
 - 15p   Noten der Stunden anzeigen: 1. Studiengänge 2. Module
