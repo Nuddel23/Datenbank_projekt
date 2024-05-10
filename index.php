@@ -36,7 +36,7 @@
                             $_SESSION['login']=true;
                             $_SESSION["benutzer"]=$row;
                             $_SESSION["Roll_ID"]=$row["Roll_ID"];
-                            header("Location: homepage.php");
+                            header("Location: load.php");
                             exit;
                         }
                     }

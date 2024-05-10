@@ -23,7 +23,7 @@
             <a href="homepage.php"><img src="../img/logo-2.png"></a>
             <div class="nav-links">
                 <ul>
-                    
+
                     <?php
                     #auf Rolle basierte Seiten
                     switch ($_SESSION["Roll_ID"]) {
@@ -71,7 +71,17 @@
         </nav>
     </section>
     <div class="textbox">
+        <form action="" method="post">
+            <input type="search" placeholder="Matrikelnummer" id="search1" name="Matrikelnummer">
+            <input type="search" placeholder="Name" id="search2" name="Name">
+            <input type="search" placeholder="Vorname" id="search3" name="Vorname">
+            <input type="submit" value="Suche">
+        </form>
+
         <?php
+
+
+
 
 
         if (isset($_POST["Note"])) {
@@ -92,11 +102,7 @@
         }
 
 
-
-
-
-
-        $query = "SELECT `konkrete_veranstaltung`.*, `veranstaltung`.`Bezeichnung`, `student_konver`.*, `student`.*
+        $query = "SELECT `konkrete_veranstaltung`.*, `veranstaltung`.`Bezeichnung`, `student_konver`.*, `student`.`Matrikelnummer`
         FROM `konkrete_veranstaltung` 
             LEFT JOIN `veranstaltung` ON `konkrete_veranstaltung`.`Veranstaltungs_ID` = `veranstaltung`.`Veranstaltungs_ID` 
             LEFT JOIN `student_konver` ON `student_konver`.`KonVer_ID` = `konkrete_veranstaltung`.`KonVer_ID` 
@@ -104,86 +110,97 @@
 
         $result = $db->execute_query($query);
 
+        if (isset($_POST["Name"])) {
+            if ($_POST["Matrikelnummer"] . $_POST["Name"] . $_POST["Vorname"] != NULL) {
+                $query = sprintf("SELECT `student`.*
+            FROM `student`
+            WHERE `student`.`Matrikelnummer` = '%s' OR `student`.`Name` = '%s' OR `student`.`Vorname` = '%s';", $_POST["Matrikelnummer"], $_POST["Name"], $_POST["Vorname"]);
+            } else {
+                $query = "SELECT `student`.*
+                FROM `student`";
+            }
+        } else {
+            $query = "SELECT `student`.*
+            FROM `student`";
+        }
+        $info = $db->execute_query($query);
+
 
         # sotieren
         $student = array();
-        $ver = array();
 
         foreach ($result as $row) {
-            if ($row["KonVer_ID"] != NULL) {
-                $student[$row["KonVer_ID"]][$row["Vorname"] . " " . $row["Name"]][$row["Matrikelnummer"]] = $row["Note"];
-            }
+            foreach ($info as $stu)
+                if ($row["Matrikelnummer"] == $stu["Matrikelnummer"]) {
+                    $student[$row["Matrikelnummer"]]["info"] = $stu;
+                    $student[$row["Matrikelnummer"]]["KonVer"][$row["KonVer_ID"]] = $row;
+                }
         }
-        #print_r($student);
-        
-        foreach ($result as $row) {
-            $ver[$row["KonVer_ID"]] = $row;
-        }
-        #print_r($ver);
-        
 
-        foreach ($ver as $row) {
+        foreach ($student as $ma) {
             echo ('<div class="auswahl"><div class="event"><fieldset>');
-            foreach ($row as $key => $val) {
-                // echo "$key: $val <br/>";
-                switch ($key) {
-                    case "Bezeichnung":
-                        if (strtotime($row["Datum"]) < time()) {
-                            echo ('<legend class="teilgenommen">' . $val . "</legend>");
+            foreach ($ma as $typ => $v_typ) {
+                if ($typ == "info") {
+                    foreach ($v_typ as $k_info => $v_info) {
+                        if ($k_info == "Name") {
+                            echo ('<legend class="teilgenommen">' . $v_info . "</legend>");
+                            echo ($k_info . " " . $v_info . "</br>");
                         } else {
-                            echo ('<legend>' . $val . "</legend>");
+                            echo ($k_info . " " . $v_info . "</br>");
                         }
+                    }
+                } elseif ($typ == "KonVer") {
+                    foreach ($v_typ as $key_kon => $kon) {
 
-                        break;
-                    case "Datum":
-                        echo ("Datum: " . $val . "</br>");
-                        break;
-                    case "KonVer_ID":
-                        echo ("Student: <ul>");
-                        if ($val != NULL) {
-                            foreach ($student[$val] as $stu => $nr) {
-                                echo ("<li>" . $stu . "</br></li>");
-                                if (strtotime($row["Datum"]) < time()) {
+                        echo ("</br><fieldset>");
+                        foreach ($kon as $k_kon => $v_kon) {
+                            if ($k_kon == "Datum") {
+                                echo ($k_kon . " " . $v_kon . "</br>");
+                                if (strtotime($v_kon) < time()) {
                                     echo ('
                                     <form method="POST" action="">
                                     Note: <select name="Note" onchange="this.form.submit()">');
 
                                     for ($i = 1; $i < 6; $i++) {
-                                        foreach ($nr as $nr_key => $note) {
-                                            if ($i == $note) {
-                                                echo ('<option selected="selected" value="' . $i . '">
+                                        if ($i == $kon["Note"]) {
+                                            echo ('<option selected="selected" value="' . $i . '">
                                             ' . $i . '</option>');
-                                            } else {
-                                                echo ('<option value="' . $i . '">
+                                        } else {
+                                            echo ('<option value="' . $i . '">
                                             ' . $i . '</option>');
-                                            }
                                         }
                                     }
-                                    if ($note == NULL) {
+                                    if ($kon["Note"] == NULL) {
                                         echo ('<option selected="selected" value="' . NULL . '">
-                                    ' . NULL . '</option>');
+                                        ' . NULL . '</option>');
                                     } else {
                                         echo ('<option value="' . NULL . '">
-                                    ' . NULL . '</option>');
+                                        ' . NULL . '</option>');
                                     }
 
-
                                     echo ("</select>");
-                                    printf('<input type="hidden" name="KonVer_ID" value="%s">', $val);
-                                    printf('<input type="hidden" name="Matrikelnummer" value="%s">', $nr_key);
+                                    printf('<input type="hidden" name="KonVer_ID" value="%s">', $key_kon);
+                                    printf('<input type="hidden" name="Matrikelnummer" value="%s">', $kon["Matrikelnummer"]);
                                     echo ("</br></form>");
+
                                 }
+                            } else if ($k_kon == "Bezeichnung") {
+                                echo ('<legend class="teilgenommen">' . $v_kon . "</legend>");
+                            } else {
+                                #echo ($k_kon . " " . $v_kon . "</br>");
                             }
                         }
-                        echo ("</ul>");
-                        break;
+                        echo ("</fieldset>");
+                    }
                 }
+
             }
             echo ("</fieldset></div></div>");
         }
         echo ('</div>');
 
         ?>
+    </div>
 </body>
 
 </html>

@@ -78,6 +78,7 @@
                             break;
                         case 2: //dozent
                             echo ('<li><a href="dozent_veranstaltung.php">Veranstalltungen </a></li> ');
+                            echo ('<li><a href="studentensuche.php">Studentensuche </a></li> ');
                             break;
                         case 3: //admin
                             echo ('<li><a href="admin/benutzer_hinzufügen.php">Benuter erstellen </a></li>');
