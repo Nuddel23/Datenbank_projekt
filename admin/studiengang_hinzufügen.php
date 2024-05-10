@@ -72,7 +72,7 @@
 
         <form method="post" action="">
             <input type="text" placeholder="Bezeichnung" name="Bezeichnung" required /></br>
-            <input type="submit" name="submit" value="hinzufügen" required />
+            <input class="submit" type="submit" name="submit" value="hinzufügen" required />
         </form>
         <?php
         if (isset($_POST["submit"])) {

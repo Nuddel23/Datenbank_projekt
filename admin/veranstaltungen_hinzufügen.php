@@ -147,7 +147,7 @@
         ?>
         <input type="text" placeholder="Bezeichnung" name="Bezeichnung"></input></br>
         <input type="number" placeholder="CP" name="CP"></input></br>
-        <input type="submit" name="submit" value="hinzufügen" />
+        <input class="submit" type="submit" name="submit" value="hinzufügen" />
     </form>
 
     <!-- Daten Verarbeiten -->

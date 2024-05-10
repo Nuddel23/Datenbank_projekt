@@ -134,7 +134,7 @@
                 }
                 echo ("</select></br>");
 
-                echo ('<input type="submit" name="submit" value="hinzufügen" />');
+                echo ('<input class="submit" type="submit" name="submit" value="hinzufügen" />');
             }
         }
 

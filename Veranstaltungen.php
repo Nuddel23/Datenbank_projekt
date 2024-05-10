@@ -182,7 +182,7 @@
                                     printf('
                                             <form method="POST" action="">
                                             <input type="hidden" id="KonVer_ID" name="KonVer_ID" value="%s">
-                                            <input type="submit" name="%s" value="eintragen"/>
+                                            <input class="student" type="submit" name="%s" value="eintragen"/>
                                             </form>',
                                         $Veranstaltung["KonVer_ID"],
                                         $val
@@ -191,7 +191,7 @@
                                     printf('
                                             <form method="POST" action="">
                                             <input type="hidden" id="KonVer_ID" name="KonVer_ID" value="%s">
-                                            <input type="submit" name="%s" value="abmelden"/>
+                                            <input class="student" type="submit" name="%s" value="abmelden"/>
                                             </form>',
                                         $Veranstaltung["KonVer_ID"],
                                         $val

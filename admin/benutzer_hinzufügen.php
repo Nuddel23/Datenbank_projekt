@@ -154,7 +154,7 @@
             printf('<input type="hidden" id="rolle" name="rolle" value="%s">', $_POST["rolle"]);
             echo ('
             </br>
-            <input type="submit" name="submit1" value="hinzufügen" />
+            <input class="submit" type="submit" name="submit1" value="hinzufügen" />
             </form>');
 
 

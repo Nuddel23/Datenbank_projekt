@@ -106,7 +106,7 @@
             echo ("</select></br>");
             ?>
             <input type="text" placeholder="Modulname" name="Modul_name" required /></br>
-            <input type="submit" name="submit" value="hinzufügen" required />
+            <input class="submit" type="submit" name="submit" value="hinzufügen" required />
         </form>
         <?php
         if (isset($_POST["submit"])) {
