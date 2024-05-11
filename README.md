@@ -1,44 +1,17 @@
 # Datenbank Projekt
 Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Universität erstellen sollen.
 
-# Todo
+1. alles innerhalb des Datenbank_Projekt Ordners bitte in htdoc kopieren.
+2. die uni.sql Datei in sql_backup bitte für die Erstllung der Datenbank benutzen.
+3. Zum testen können die unten angegebenen Acc benutzt werden.
 
-## evtl.
-- none  Modul abschliessen mit Abschluss Prüfung
-- none  CP in Quicklinks einbauen
-- 10p   Klaender ansicht
-- 5p    Ladebalken
-- none  Studiengang + Modul + Veranstalltung erstellen auf einer Seite
-- none  Modul bearbeiten
+bereits exestierende acc
+- john (student)
+- john_student (student)
+- john_dozi (dozent)
+- john_admin (admin)
 
-
-## geplant
-- none  Login wieder automatisch weiterleiten
-- 10p   Dozenten nach Studenten suchen lassen + Noten der Schüler
-
-## am machen 
-
-## erledigt
-- none  Homepage überarbeiten
-- none  dozenten alle ihre Veranstaltungen ansehen lassen
-- 5p    Gesamte Cp Studenten anzeigen
-- 5p    Quicklinks: für Studenten studiengang, module und Veranstalltungen anzeigen lassen
-- none  Verpasste Veranstalltungen anzeigen
-- 15p   Noten der Stunden anzeigen: 1. Studiengänge 2. Module
-- fix   studenten sehen alle Veranstalltungen selbst die nicht in ihrem studiengang sind
-- max   studenten müssen sich in konkrete Veranstaltungen eintragen können
-- max   admins konkrete Veranstalltungen erstellen lassen
-- max   admin Veranstalltungen erstellen
-- Veranstalltungen anzeigen
-- noch nicht gemachte Veranstaltungen anzeigen
-- module einfügen
-- studiengang einfügen
-- Login
-- studenten, dozenten und admins einfügen
-- benutzer erstellen
-- adresse einfügen
-- temp homepage 
-- temp admin page
+alle passwörter sind "john"
 
 
 
