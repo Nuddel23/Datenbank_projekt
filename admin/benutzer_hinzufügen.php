@@ -263,10 +263,9 @@
                 }
 
                 if ($db->execute_query($query) === true) {
-                    echo ("benutzer success</br>");
                     $random = rand();
                     $Ben_ID = $db->insert_id;
-                    echo ("<a href='http://localhost/registrieren.php?ID=" . hash_hmac('sha256', $Ben_ID, $random) . "'>Registrieren</a></br>");
+                    printf("</br><a href='http://localhost/registrieren.php?ID="."%s"."' class='submit'>Registrieren</a></br>",hash_hmac('sha256', $Ben_ID, $random));
                     echo ("Admin Code: " . $random);
                 } else {
                     echo ($db->error);

@@ -1,6 +1,9 @@
 * {
   margin: 0;
-  /* padding: 0; */
+}
+
+.background{
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .header {
@@ -81,6 +84,22 @@ nav img {
 
 .admin h1{
   text-align: center;
+}
+
+.login{
+  font-size: 1.5vw;
+  width: 40%;
+  top: 30%;
+  position: absolute;
+  left: 30%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 1vw;
+  border-color: #fff;
+  border: 2px solid;
+  color: white;
+  padding: 5px;
 }
 
 .submit,
