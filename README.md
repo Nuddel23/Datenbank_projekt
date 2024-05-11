@@ -1,6 +1,9 @@
 # Datenbank Projekt
 Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Universität erstellen sollen.
 
+link zu Github:
+https://github.com/Nuddel23/Datenbank_projekt
+
 1. alles innerhalb des Datenbank_Projekt Ordners bitte in htdoc kopieren.
 2. die uni.sql Datei in sql_backup bitte für die Erstllung der Datenbank benutzen.
 3. Zum testen können die unten angegebenen Acc benutzt werden.
