@@ -7,6 +7,7 @@
 
 <body class="header">
     <div class="login">
+        <a href="homepage.php"><img src="../img/logo-2.png"></a>
         <h1>Login</h1>
         </br>
         <form method="post" action="">

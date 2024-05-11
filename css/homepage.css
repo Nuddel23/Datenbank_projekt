@@ -1,4 +1,4 @@
-* {
+*{
   margin: 0;
 }
 
@@ -88,10 +88,9 @@ nav img {
 
 .login{
   font-size: 1.5vw;
+  margin: auto;
   width: 40%;
-  top: 30%;
-  position: absolute;
-  left: 30%;
+  margin-top: 10%;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
@@ -100,6 +99,10 @@ nav img {
   border: 2px solid;
   color: white;
   padding: 5px;
+}
+
+.login img{
+  width: 50%;
 }
 
 .submit,
