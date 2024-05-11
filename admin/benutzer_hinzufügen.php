@@ -67,7 +67,8 @@
                     </li>
                 </ul>
         </nav>
-        <div class="admin">
+    </section>
+    <div class="admin">
             <h1>Benutzer hinzufügen</h1>
             </br>
             <?php
@@ -139,7 +140,7 @@
 
                 #Studiengang
                 if ($_POST["rolle"] == 1) {
-                    echo ("Studiengänge:</br>");
+                    echo ("Studiengang: ");
                     echo ('<select name="studiengang">');
                     $query = "SELECT * FROM `studiengang`";
                     $result = $db->execute_query($query);
@@ -190,7 +191,7 @@
                         $query = sprintf("INSERT INTO `plz` (`PLZ`, `Ort`) VALUES ('%s', '%s') ", $_POST["PLZ"], $_POST["Ort"]);
 
                         if ($db->execute_query($query) === true) {
-                            echo ("PLZ success </br>");
+                            #echo ("PLZ success </br>");
                         } else {
                             echo ($db->error);
                         }
@@ -202,7 +203,7 @@
                                         VALUES (NULL, '%s', '%s', '%s') ", $_POST["Straße"], $_POST["Hausnummer"], $_POST["PLZ"]);
 
                         if ($db->execute_query($query) === true) {
-                            echo ("Adrese success </br>");
+                            #echo ("Adrese success </br>");
                             $adresse = $db->insert_id;
                         } else {
                             echo ($db->error);
@@ -241,7 +242,7 @@
 
                     #einfügen
                     if ($db->execute_query($query) === true) {
-                        echo ('rolle success</br>');
+                        #echo ('rolle success</br>');
                     } else {
                         echo ($db->error);
                     }
@@ -265,7 +266,7 @@
                 if ($db->execute_query($query) === true) {
                     $random = rand();
                     $Ben_ID = $db->insert_id;
-                    printf("</br><a href='http://localhost/registrieren.php?ID="."%s"."' class='submit'>Registrieren</a></br>",hash_hmac('sha256', $Ben_ID, $random));
+                    printf("</br><a href='http://localhost/registrieren.php?ID=" . "%s" . "' class='submit'>Registrieren</a></br>", hash_hmac('sha256', $Ben_ID, $random));
                     echo ("Admin Code: " . $random);
                 } else {
                     echo ($db->error);

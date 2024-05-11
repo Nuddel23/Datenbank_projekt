@@ -60,18 +60,16 @@ nav img {
   color: #fff;
   position: absolute;
   top: 20%;
-  /*right: 50%; */
-  transform: (-50%, -50%);
   text-align: center;
 }
 
 
 .admin{
-  font-size: 1.5vw;
   width: 80%;
-  top: 20%;
   position: absolute;
+  top: 20%;
   left: 10%;
+  font-size: 1.5vw;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
@@ -79,7 +77,6 @@ nav img {
   border-color: #fff;
   border: 2px solid;
   color: white;
-  padding: 5px;
 }
 
 .admin h1{
@@ -160,10 +157,11 @@ input[type=date]{
   width: 90%;
   margin: auto;
   text-align: left;
-  z-index: -1;
+  
 }
 
 details {
+  text-align: left;
   background-color: transparent;
   backdrop-filter: blur(10px);
   border-radius: 1vw;

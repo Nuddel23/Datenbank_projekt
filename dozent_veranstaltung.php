@@ -85,7 +85,7 @@
             );
 
             if ($db->execute_query($query) === true) {
-                echo ('Note success</br>');
+                #echo ('Note success</br>');
             } else {
                 echo ($db->error);
             }
