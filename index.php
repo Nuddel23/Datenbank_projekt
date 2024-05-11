@@ -22,9 +22,9 @@
     if (isset($_SESSION["login"]) == false) {
         $_SESSION["login"] = false;
     }
-    // if ($_SESSION['login'] == true){
-    //     header("Location: homepage.php");
-    // }
+    if ($_SESSION['login'] == true){
+        header("Location: homepage.php");
+    }
     
     if (isset($_POST["submit"])) {
         require $_SERVER['DOCUMENT_ROOT'] . "/Datenbank.php";

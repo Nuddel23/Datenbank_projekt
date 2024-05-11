@@ -1,5 +1,5 @@
 # Datenbank Projekt
-Dies ist ein Datenbank Projekt, wo wir eine Datenbank für eine Imagenäre Universität erstellen sollen.
+Dies ist ein Datenbank Projekt, wo wir eine Website für eine Imagenäre Universität erstellen sollen.
 
 link zu Github:
 https://github.com/Nuddel23/Datenbank_projekt
