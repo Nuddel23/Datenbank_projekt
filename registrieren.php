@@ -7,7 +7,9 @@
 
 <body class="header">
     <div class="login">
+        <a href="homepage.php"><img src="../img/logo-2.png"></a>
         <h1>Registrieren</h1>
+        </br>
         <form method="post" action="">
             <input type="text" placeholder="Admin code" name="Admin_code" required /></br>
             <input type="text" placeholder="Benutzername" name="Benutzername" required /></br>
